@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <body>
+    <input class="iban" placeholder="Ej: ES12 3456 7890 1234 5678 9012">
+    <script>
+      const entrada = document.querySelector("input");
+      
+      entrada.onchange = function() {
+        let contenido = this.value;
+
+        // Verificar la longitud y los espacios en blanco en posiciones específicas
+        if (contenido.length === 24 && 
+            contenido[4] === " " && 
+            contenido[9] === " " && 
+            contenido[14] === " " && 
+            contenido[19] === " ") {
+          this.style.background = "rgb(200, 255, 200)"; // Color de fondo válido
+          console.log("Formato de IBAN correcto");
+        } else {
+          this.style.background = "rgb(255, 200, 200)"; // Color de fondo no válido
+          console.log("Formato de IBAN incorrecto");
+        }
+      };
+    </script>
+  </body>
+</html>
+

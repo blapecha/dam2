@@ -1,0 +1,38 @@
+body{
+  font-family:sans-serif;
+/*background:  rgb(220,220,220);*/
+    background-image: url(img/background.jpg);
+        background-size: cover;
+}
+#formlogin{
+  width:300px;
+  height:350px;
+  margin:auto;
+  margin-top:200px;
+  background:white;
+  padding:30px;
+  text-align:center;
+     background-color: rgba(0, 0, 0, 0.2);
+    
+    border: 2px solid red;
+  padding: 10px;
+  border-radius: 25px;
+    backdrop-filter: blur(10px); 
+    
+}
+#logo{
+  width:50%;
+}
+input,button{
+  width:90%; 
+  margin-bottom:10px;
+  margin-top:10px;
+      border: 2px solid red;
+  padding: 10px;
+  border-radius: 25px;
+     background-color: rgba(0, 0, 0, 0.2);
+    color: white;
+}
+input::placeholder{
+   color: white 
+}

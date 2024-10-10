@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo de Slider</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+        .slider-container {
+            margin: 20px 0;
+        }
+        .slider {
+            width: 100%;
+        }
+        .value {
+            margin-top: 10px;
+            font-size: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Control Deslizante (Slider)</h1>
+
+<div class="slider-container">
+    <input type="range" id="mySlider" class="slider" min="0" max="100" value="50">
+    <div class="value" id="sliderValue">Valor: 50</div>
+</div>
+
+<script>
+    const slider = document.getElementById("mySlider");
+    const sliderValue = document.getElementById("sliderValue");
+
+    // Función para actualizar el valor mostrado
+    slider.oninput = function() {
+        sliderValue.innerHTML = "Valor: " + this.value;
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+  <body>
+    <style>
+      canvas{border:1px solid grey;} 
+    </style>
+    <button class="herramienta" id="dibujar">Dibujar</button>
+    <button class="herramienta" id="borrar">Borrar</button>
+    <button class="herramienta" id="nuevo">Nuevo</button>
+    <input type="color" id="color">
+    <select id="radio">
+      <option value=2>2</option>
+      <option value=4>4</option>
+      <option value=6>6</option>
+      <option value=8>8</option>
+      <option value=10>10</option>
+    </select>
+    <canvas></canvas>
+
+    <script>
+    var operacion = "dibujar";
+     var radio = 2;
+      var pulsado = false;                                    // De entrada no estoy pulsando el raton
+      document.onmousedown = function(){pulsado = true;}      // Cuando pulso el boton izquierdo, cambio la variable
+      document.onmouseup = function(){pulsado = false;}       // Cuando despulso, cambio la variable
+      const lienzo = document.querySelector("canvas")         // atrapo el lienzo
+      const contexto = lienzo.getContext("2d")                // Atrapo el contexto
+      contexto.fillStyle = "black"
+      lienzo.width = 512                                      // Le doy anchura al lienzo
+      lienzo.height = 512                                     // Le doy altura al lienzo
+      
+      lienzo.onmousemove = function(e) {
+        if (pulsado) {
+          if (operacion === "dibujar") {
+            contexto.fillStyle = document.getElementById("color").value; // Cambiar color según el input
+            contexto.fillRect(e.offsetX, e.offsetY, radio, radio); // Dibuja
+          } else if (operacion === "borrar") {
+            contexto.clearRect(e.offsetX, e.offsetY, radio, radio); // Borra
+          }
+        }
+      };
+
+      
+      document.getElementById("color").onchange = function() {                        // Cambiar el color del pincel
+        contexto.fillStyle = this.value;                                              // El color del contexto es el color del input
+      };
+
+      document.getElementById("radio").onchange = function() {                         // Cambiar el tamaño del pincel
+        radio = this.value;                                                           // Actualizar el tamaño del pincel
+      };
+
+     
+      document.getElementById("dibujar").onclick = function() {                         // Cambiar a la operación de dibujar
+        operacion = "dibujar";                                                        // Establecer operación a dibujar
+      };
+
+     
+      document.getElementById("borrar").onclick = function() {                         // Cambiar a la operación de borrar
+        operacion = "borrar";                                                        // Establecer operación a borrar
+      };
+
+      document.getElementById("nuevo").onclick = function() {                    // Limpiar el canvas cuando se pulsa el botón "Nuevo"
+        contexto.clearRect(0, 0, lienzo.width, lienzo.height);                     // Limpiar todo el lienzo
+      };
+    </script>
+  </body>
+</html>

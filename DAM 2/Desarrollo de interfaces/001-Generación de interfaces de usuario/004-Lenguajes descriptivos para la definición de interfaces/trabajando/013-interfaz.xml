@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interfaz>
+  <boton>Púlsame</boton>
+   <boton>Adios</boton>
+  <texto>Esto es un texto</texto>
+  <entrada></entrada>
+  <boton>Hola</boton>
+  <boton>Que tal</boton>
+  <texto>Este es otro texto</texto>
+  <texto>EY este es otro texto mas</texto>
+  <salida>Hola</salida>
+  <entrada></entrada>
+  <salida>Por aqui se sale</salida>
+  <entrada></entrada>
+  <entrada></entrada>
+  <a>
+    <b>soy b</b>
+    <c>soy c</c>
+  </a>
+</interfaz>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <body>
+    <canvas id="lienzo1"></canvas>
+    <script>
+        const tiempoinicio = new Date();                            // Marca el inicio del tiempo
+        const epochinicio = tiempoinicio.getTime();                 // Epoch de inicio
+
+        const lienzo = document.querySelector("#lienzo1");          // Selecciono el lienzo
+        lienzo.width = 6000;                                        // Establezco el ancho del lienzo
+        lienzo.height = 4000;                                       // Establezco el alto del lienzo
+        const contexto = lienzo.getContext("2d");                   // Contexto 2D para dibujar
+
+        var imagen = new Image();                                   // Creo una nueva imagen
+        imagen.src = "foto.JPG";                                    // Le asigno la fuente de la imagen
+        imagen.onload = function() {                                // Cuando la imagen haya cargado
+          contexto.drawImage(imagen, 0, 0);                         // Pinto la imagen en el lienzo
+          
+          var datos = contexto.getImageData(0, 0, lienzo.width, lienzo.height);  // Obtengo los datos de la imagen
+          
+          for (let i = 0; i < datos.data.length; i += 4) {          // Recorro cada pixel
+            let gris = Math.round((datos.data[i] + datos.data[i+1] + datos.data[i+2]) / 3);  // Saco el promedio
+            
+            datos.data[i] = gris;                                   // Actualizo el rojo a gris
+            datos.data[i+1] = gris;                                 // Actualizo el verde a gris
+            datos.data[i+2] = gris;                                 // Actualizo el azul a gris
+          }
+          
+          contexto.putImageData(datos, 0, 0);                       // Escribo los datos procesados en el lienzo
+
+          const tiempofinal = new Date();                           // Marca el tiempo final
+          const epochfinal = tiempofinal.getTime();                 // Epoch del tiempo final
+          const resta = epochfinal - epochinicio;                   // Tiempo total de procesamiento
+          console.log("Esta operación tardó", resta, "milisegundos");
+        };
+    </script>
+  </body>
+</html>
+

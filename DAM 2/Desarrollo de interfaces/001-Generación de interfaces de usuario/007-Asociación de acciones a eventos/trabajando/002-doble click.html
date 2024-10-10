@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <body>
+    <button>Púlsame</button>
+    <p id="mensaje"></p> <!-- Mensaje que se mostrará tras el doble clic -->
+
+    <script>
+      let boton = document.querySelector("button");
+      let mensaje = document.getElementById("mensaje");
+
+
+
+      // Evento para el doble clic
+      boton.ondblclick = function() {
+        console.log("Me has pulsado dos veces");
+        mensaje.innerHTML = "¡Doble clic detectado!";
+        boton.style.backgroundColor = "lightgreen"; // Cambia color tras el doble clic
+      };
+    </script>
+  </body>
+</html>

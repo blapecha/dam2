@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <body>
+    <style>
+      canvas { border: 1px solid grey; }
+    </style>
+    
+    <canvas></canvas>
+    <button id="limpiar">Limpiar lienzo</button>
+    
+    <script>
+      const lienzo = document.querySelector("canvas");
+      const contexto = lienzo.getContext("2d");
+      const botonLimpiar = document.getElementById("limpiar");
+      lienzo.width = 512;
+      lienzo.height = 512;
+      
+      let dibujando = false;
+      let color = "black"; // Color inicial del pincel
+
+      // Función para comenzar a dibujar
+      lienzo.onmousedown = function(e) {
+        dibujando = true;
+        contexto.beginPath(); // Inicia un nuevo trazo
+        contexto.moveTo(e.offsetX, e.offsetY); // Mueve el pincel a la posición inicial
+      };
+
+      // Función para dibujar en el lienzo mientras se mueve el ratón
+      lienzo.onmousemove = function(e) {
+        if (dibujando) {
+          contexto.lineTo(e.offsetX, e.offsetY); // Dibuja una línea hacia la posición del ratón
+          contexto.strokeStyle = color; // Asigna el color actual
+          contexto.lineWidth = 2; // Tamaño del pincel
+          contexto.stroke(); // Dibuja la línea
+        }
+      };
+
+      // Detener el dibujo cuando se suelta el botón del ratón
+      lienzo.onmouseup = function() {
+        dibujando = false;
+      };
+
+      // Función para limpiar el lienzo
+      botonLimpiar.onclick = function() {
+        contexto.clearRect(0, 0, lienzo.width, lienzo.height);
+      };
+    </script>
+  </body>
+</html>

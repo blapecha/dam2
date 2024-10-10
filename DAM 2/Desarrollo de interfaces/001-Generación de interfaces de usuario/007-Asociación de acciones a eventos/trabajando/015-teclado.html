@@ -1,0 +1,13 @@
+<<!doctype html>
+<html>
+  <body>
+    <input type="text" placeholder="Escribe algo...">
+    <script>
+      const entrada = document.querySelector("input");
+      entrada.onkeypress = function(event) {
+        console.log("Has pulsado una tecla");
+        console.log("Texto actual: " + entrada.value); // Captura y muestra el valor actual del input
+      };
+    </script>
+  </body>
+</html>

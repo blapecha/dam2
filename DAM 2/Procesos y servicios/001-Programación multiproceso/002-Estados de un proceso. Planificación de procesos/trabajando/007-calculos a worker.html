@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <body>
+    <canvas id="lienzo1"></canvas>
+    <p id="info"></p> <!-- Añadí un párrafo para mostrar información adicional -->
+    <script>
+        // Función para iniciar el procesamiento
+        function iniciarProcesamiento() {
+          const tiempoinicio = new Date();                      // Marca el inicio del tiempo
+          const epochinicio = tiempoinicio.getTime();           // Epoch de inicio
+          
+          const lienzo = document.querySelector("#lienzo1");    // Selecciono el lienzo
+          lienzo.width = 6000;                                  // Establezco el ancho del lienzo
+          lienzo.height = 4000;                                 // Establezco el alto del lienzo
+          const contexto = lienzo.getContext("2d");             // Contexto 2D para dibujar
+
+          // Creo una nueva imagen y asigno la fuente
+          var imagen = new Image();
+          imagen.src = "foto.JPG";
+
+          imagen.onload = function() {                          // Cuando la imagen cargue
+            contexto.drawImage(imagen, 0, 0);                   // Pinto la imagen en el lienzo
+            
+            var datos = contexto.getImageData(0, 0, lienzo.width, lienzo.height); // Obtengo los datos de la imagen
+
+            // Creo un worker para el procesamiento en paralelo
+            var trabajador = new Worker("007-worker.js");
+            trabajador.postMessage(datos.data);                 // Envío los datos de la imagen al Worker
+
+            trabajador.onmessage = function(misdatos) {          // Cuando el Worker envíe los datos de vuelta
+              // Actualizo los datos procesados
+              for (let i = 0; i < datos.data.length; i++) {
+                datos.data[i] = misdatos.data[i];
+              }
+
+              contexto.putImageData(datos, 0, 0);               // Escribo los datos procesados en el lienzo
+
+              const tiempofinal = new Date();                   // Marca el tiempo final
+              const epochfinal = tiempofinal.getTime();          // Epoch del tiempo final
+              const resta = epochfinal - epochinicio;            // Tiempo total de procesamiento
+
+              // Muestra el tiempo que tardó la operación en milisegundos
+              console.log("Esta operación tardó", resta, "milisegundos");
+
+              // Información adicional: número de píxeles procesados
+              const numPixeles = datos.data.length / 4;          // Cada píxel tiene 4 componentes (RGBA)
+              document.querySelector("#info").textContent = "Procesado completado: " + numPixeles + " píxeles.";
+            };
+          };
+        }
+        iniciarProcesamiento();    // Llamo a la función para iniciar el procesamiento
+    </script>
+  </body>
+</html>
+

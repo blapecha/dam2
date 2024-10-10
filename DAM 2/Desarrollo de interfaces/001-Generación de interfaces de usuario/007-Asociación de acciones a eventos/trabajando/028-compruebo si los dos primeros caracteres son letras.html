@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <body>
+    <input class="iban" placeholder="Ej: ES12 3456 7890 1234 5678 9012">
+    <script>
+      // Función para verificar si un carácter es una letra
+      function isLetter(char) {
+        return /^[a-zA-Z]$/.test(char);
+      }
+
+      // Seleccionamos el campo de entrada
+      const entrada = document.querySelector("input");
+
+      // Evento que se dispara cuando el contenido del input cambia
+      entrada.onchange = function() {
+        let contenido = this.value;
+
+        // Verificamos la longitud del contenido
+        if (contenido.length === 24) {
+          // Comprobamos los espacios en las posiciones 4, 9, 14 y 19
+          if (
+            contenido[4] === " " &&
+            contenido[9] === " " &&
+            contenido[14] === " " &&
+            contenido[19] === " " &&
+            isLetter(contenido[0]) && // Primera letra
+            isLetter(contenido[1])    // Segunda letra
+          ) {
+            this.style.background = "rgb(200, 255, 200)"; // Color de fondo válido
+            console.log("Formato de IBAN correcto");
+          } else {
+            this.style.background = "rgb(255, 200, 200)"; // Color de fondo no válido
+            console.log("Formato de IBAN incorrecto");
+          }
+        } else {
+          // Si la longitud no es 24, se considera incorrecto
+          this.style.background = "rgb(255, 200, 200)";
+          console.log("Formato de IBAN incorrecto: longitud no válida");
+        }
+      };
+    </script>
+  </body>
+</html>
+

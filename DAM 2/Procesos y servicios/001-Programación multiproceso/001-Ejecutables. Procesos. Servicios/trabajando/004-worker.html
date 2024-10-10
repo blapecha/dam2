@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <body>
+    <script>
+      
+      const navegador = navigator;        // Instancio el objeto navigator
+      console.log(navegador);             // Lo saco por consola
+      const nucleos = navegador.hardwareConcurrency // Saco el número de núcleos
+      console.log("Tu ordenador tiene",nucleos,"núcleos")
+
+                                                                  // Información sobre la memoria del dispositivo
+      const memoria = navegador.deviceMemory;                   // Memoria en GB
+      console.log("Tu ordenador tiene aproximadamente", memoria, "GB de memoria disponible.");
+      
+      let trabajador = new Worker("004-worker.js");   // Creo una instancia de Worker
+      trabajador.postMessage("hola");                 // Le envío un mensaje 
+      let memoriadisponible =new Worker("004-memoriadisponible.js");
+      memoriadisponible.postMessage("ya sabes la memoria");
+      
+      
+    </script>
+  </body>
+</html>

@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+
+<head>
+  <style>
+    /* Estilo para el lienzo */
+    canvas {
+      border: 1px solid grey;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="lienzo1"></canvas>
+  <canvas id="lienzo2"></canvas>
+  <script>
+    // Declaro variables globales en uso en todo el juego
+    gravedad = 1;
+
+    // Cargo las imágenes del jugador (bueno) y del NPC (malo)
+    var imagenbueno = new Image();
+    imagenbueno.src = "./img/bueno.png";
+    var imagenmalo = new Image();
+    imagenmalo.src = "./img/malo.png";
+
+    // Clase que representa al jugador
+    class Jugador {
+      constructor() {
+        this.x = 256; // Posición inicial en X
+        this.y = 256; // Posición inicial en Y
+        this.vy = 0;  // Velocidad vertical
+        this.vivo = true; // Variable para verificar si el jugador está vivo
+      }
+
+      dibuja() {
+        // Dibuja la imagen del jugador en el lienzo
+        contexto.drawImage(imagenbueno, this.x, this.y);
+      }
+
+      mueve() {
+        if (this.vivo) { // Solo mueve el jugador si está vivo
+          this.vy += gravedad; // Aplica gravedad
+          this.y += this.vy;   // Actualiza la posición Y
+          this.muere();        // Verifica si el jugador ha muerto
+        }
+      }
+
+      muere() {
+        // Verifica si el jugador ha salido del lienzo (muere)
+        if (this.y > 512 && this.vivo) {
+          this.vivo = false; // El jugador ahora está muerto
+          console.log("El bueno ha muerto!"); // Mensaje de muerte en consola
+          setTimeout(() => {
+            this.reiniciar(); // Reiniciar después de 5 segundos
+          }, 5000);
+        }
+      }
+
+      reiniciar() {
+        // Reinicia la posición del jugador y su estado
+        this.x = 256; // Reiniciar la posición en el centro
+        this.y = 256;
+        this.vy = 0; // Reiniciar la velocidad
+        this.vivo = true; // Volver a poner al jugador vivo
+      }
+    }
+
+    // Clase que representa a un NPC
+    class Npc {
+      constructor() {
+        this.x = Math.random() * 512; // Posición aleatoria en X
+        this.y = Math.random() * 512; // Posición aleatoria en Y
+        this.angulo = Math.random() * Math.PI * 2; // Ángulo aleatorio
+        this.vy = 0; // Velocidad vertical del NPC
+      }
+
+      rebota() {
+        // Detecta si el NPC está fuera de los límites y lo hace rebotar
+        if (this.x < 0) { this.x = 10; this.angulo += Math.PI; }
+        if (this.x > 512) { this.x = 502; this.angulo += Math.PI; }
+        if (this.y < 0) { this.y = 0; this.angulo += Math.PI; }
+        if (this.y > 512) { this.y = 502; this.angulo += Math.PI; }
+      }
+
+      mueve() {
+        // Mueve al NPC según su ángulo
+        this.x += Math.cos(this.angulo);
+        this.y += Math.sin(this.angulo);
+      }
+
+      dibuja() {
+        // Dibuja la imagen del NPC en el lienzo
+        contexto.drawImage(imagenmalo, this.x, this.y);
+      }
+    }
+
+    // Instancia del jugador
+    var jugador = new Jugador();
+
+    // Instancia de los NPCs en un array
+    var misnpcs = [];
+    var numeronpc = 20; // Número de NPCs
+    for (let i = 0; i < numeronpc; i++) {
+      misnpcs[i] = new Npc(); // Crear NPCs
+    }
+
+    // Inicializa los lienzos y sus contextos
+    var lienzo = document.querySelector("#lienzo1");
+    var contexto = lienzo.getContext("2d");
+    lienzo.width = 512;
+    lienzo.height = 512;
+
+    var lienzo2 = document.querySelector("#lienzo2");
+    var contexto2 = lienzo2.getContext("2d");
+    lienzo2.width = 512;
+    lienzo2.height = 512;
+    contexto2.fillStyle = "green"; // Color de fondo del segundo lienzo
+
+    // Controles para mover al jugador con las teclas del teclado
+    document.onkeydown = function (e) {
+      if (e.key == "ArrowUp") { jugador.y -= 5; }
+      if (e.key == "ArrowDown") { jugador.y += 5; }
+      if (e.key == "ArrowLeft") { jugador.x -= 5; }
+      if (e.key == "ArrowRight") { jugador.x += 5; }
+    }
+
+    function bucle() {
+      // Limpia los lienzos
+      contexto.clearRect(0, 0, 512, 512); // Limpio el lienzo 1
+      contexto2.clearRect(0, 0, 512, 512); // Limpio el lienzo 2
+
+      // Mueve y dibuja a todos los NPCs
+      for (let i = 0; i < numeronpc; i++) {
+        misnpcs[i].mueve();
+        misnpcs[i].rebota();
+        misnpcs[i].dibuja();
+      }
+
+      // Mueve y dibuja al jugador
+      jugador.mueve();
+      jugador.dibuja();
+
+      // Verificar colisión con algún NPC
+      if (jugador.vivo) { // Solo verificar colisión si el jugador está vivo
+        var datos = contexto.getImageData(jugador.x, jugador.y, 1, 1).data; // Obtener color del pixel
+        var alpha = datos[3]; // Transparencia del pixel
+        if (alpha == 255) { // Si hay colisión (pixel opaco)
+          window.location = window.location; // Recargar la página si hay colisión (perdiste)
+        }
+      }
+
+      requestAnimationFrame(bucle); // Llama a la siguiente animación
+    }
+
+    // Iniciar el bucle de animación
+    requestAnimationFrame(bucle);
+  </script>
+</body>
+
+</html>

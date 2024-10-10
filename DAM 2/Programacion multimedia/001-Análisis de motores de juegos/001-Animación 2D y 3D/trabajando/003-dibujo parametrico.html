@@ -1,0 +1,34 @@
+
+<!doctype html>
+<html>
+  <head>
+    <style>
+      canvas{border:1px solid grey;}
+    </style>
+  </head>
+  <body>
+    <canvas></canvas>
+    <script>
+      var x = 20;
+      var y = 20;
+      var lienzo = document.querySelector("canvas");
+      var contexto = lienzo.getContext("2d");
+      lienzo.width = 512;
+      lienzo.height = 512;
+      
+      var temporizador = setTimeout("bucle()",1000);
+      function bucle(){
+        x+=40;
+      //contexto.fillRect(x,y,30,30);
+     
+        contexto.arc(x, 25, 14.50, 0, 2 * Math.PI, false);
+       contexto.fillStyle = 'blue';
+      contexto.fill();
+        console.log("esto es un bucle que salta")
+        clearTimeout(temporizador);
+        temporizador = setTimeout("bucle()",1000);
+      }
+    </script>
+  </body>
+</html>
+

@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <body>
+    <script>
+      
+      let inicio = new Date();               // Inicio del tiempo
+      let epochinicio = inicio.getTime();    // Epoch al inicio
+      
+      let numero = 0.5;                      // Inicializo un número con valor 0.5
+      let iteraciones = 10000000;            // Número de iteraciones del cálculo
+      for(let i = 0; i < iteraciones; i++) { // Bucle que itera 10 millones de veces
+        numero += 0.00000001;                // Suma un número muy pequeño en cada iteración
+      }
+      
+      let final = new Date();                // Fecha al final del cálculo
+      let epochfinal = final.getTime();      // Epoch al final del programa
+      let resta = epochfinal - epochinicio;  // Diferencia de tiempo entre el inicio y el final
+      console.log("La diferencia de tiempo ha sido de ",resta,"ms"); // Mostrar tiempo en consola
+      console.log("El resultado final del número es ", numero);      // Mostrar el resultado final
+      
+    </script>
+  </body>
+</html>
+

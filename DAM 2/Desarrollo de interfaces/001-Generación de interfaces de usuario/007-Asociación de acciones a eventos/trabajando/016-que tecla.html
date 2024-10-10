@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      body {
+        display: flex;
+        justify-content: center; /* Centra horizontalmente */
+        align-items: center;     /* Centra verticalmente */
+        height: 100vh;          /* Altura del viewport */
+        background-color: #f0f0f0; /* Color de fondo */
+        font-family: Arial, sans-serif; /* Fuente */
+      }
+
+      input {
+        padding: 10px;           /* Espaciado interno */
+        border: 2px solid #007BFF; /* Borde azul */
+        border-radius: 5px;      /* Bordes redondeados */
+        width: 200px;            /* Ancho fijo */
+        font-size: 16px;         /* Tamaño de fuente */
+        transition: border-color 0.3s; /* Transición suave del color del borde */
+      }
+
+      input:focus {
+        border-color: #0056b3;   /* Cambia el color del borde al enfocar */
+        outline: none;            /* Sin contorno por defecto */
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" placeholder="Escribe algo...">
+    <script>
+      const entrada = document.querySelector("input");
+      entrada.onkeypress = function(e) {
+        console.log("Has pulsado una tecla");
+        console.log(e.key);
+      };
+    </script>
+  </body>
+</html>
+

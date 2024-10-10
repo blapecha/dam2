@@ -1,0 +1,13 @@
+{
+    "nombre": "Blanca",
+    "apellidos": "Perez Chavarria",
+    "emails": {
+        "personal": [
+            "edukka2@gmail.com"
+        ],
+        "profesional": [
+            "info@educa.com",
+            "info@educa.com"
+        ]
+    }
+}

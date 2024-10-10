@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <body>
+    <canvas id="lienzo1"></canvas>
+    <p id="progreso">Progreso: 0%</p>  <!-- Agrego una barra de progreso -->
+    <script>
+        const tiempoinicio = new Date();                            // Marca el inicio del tiempo
+        const epochinicio = tiempoinicio.getTime();                 // Epoch de inicio
+
+        const lienzo = document.querySelector("#lienzo1");          // Selecciono el lienzo
+        lienzo.width = 6000;                                        // Establezco el ancho del lienzo
+        lienzo.height = 4000;                                       // Establezco el alto del lienzo
+        const contexto = lienzo.getContext("2d");                   // Contexto 2D para dibujar
+
+        var imagen = new Image();                                   // Creo una nueva imagen
+        imagen.src = "foto.JPG";                                    // Le pongo una imagen real
+        imagen.onload = function() {                                // Solo cuando la imagen cargue
+          contexto.drawImage(imagen, 0, 0);                         // Dibujo la imagen en el lienzo
+          
+          var datos = contexto.getImageData(0, 0, 6000, 4000);      // Leo los datos de la imagen
+          let totalPixeles = datos.data.length / 4;                 // Calculo el total de píxeles
+          for (let i = 0; i < datos.data.length; i += 4) {          // Recorro cada pixel
+            let c = datos.data;                                     // Cargo los datos del pixel
+            let gris = Math.round((c[i] + c[i+1] + c[i+2]) / 3);    // Saco el promedio del color
+
+            // Actualizo los valores de rojo, verde y azul a gris
+            datos.data[i] = gris; 
+            datos.data[i+1] = gris;
+            datos.data[i+2] = gris;
+
+            // Actualizo el progreso cada cierto número de píxeles
+            if (i % (totalPixeles / 100) === 0) {
+              let porcentaje = Math.round((i / datos.data.length) * 100);
+              document.querySelector("#progreso").textContent = "Progreso: " + porcentaje + "%";
+            }
+          }
+
+          contexto.putImageData(datos, 0, 0);                      // Coloco los datos modificados en el lienzo
+       
+          const tiempofinal = new Date();                          // Tiempo de finalización
+          const epochfinal = tiempofinal.getTime();
+          const resta = epochfinal - epochinicio;
+
+        
+          console.log("Esta operación tarda en hacerse", resta, "milisegundos");   // Mensaje en consola con el tiempo que tomó la operación
+        };
+    </script>
+  </body>
+</html>

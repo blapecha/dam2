@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+  <body>
+    <style>
+      canvas {
+        border: 1px solid grey;
+      }
+      .color-preview {
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        border: 1px solid black;
+      }
+    </style>
+    
+    <input type="color" id="color" value="#000000"> Color
+    <div class="color-preview" id="colorPreview" style="background-color: #000000;"></div><br><br>
+    
+    
+    <button id="limpiar">Limpiar lienzo</button>
+    <canvas></canvas>
+    
+    <script>
+      var pulsado = false; // De entrada no estoy pulsando el raton
+      document.onmousedown = function() { pulsado = true; }; // Cuando pulso el boton izquierdo
+      document.onmouseup = function() { pulsado = false; }; // Cuando despulso
+      
+      const lienzo = document.querySelector("canvas"); // atrapo el lienzo
+      const contexto = lienzo.getContext("2d"); // Atrapo el contexto
+      contexto.fillStyle = "black"; // Color por defecto
+      lienzo.width = 512; // Le doy anchura al lienzo
+      lienzo.height = 512; // Le doy altura al lienzo
+
+      // Cambiar color del pincel
+      document.getElementById("color").onchange = function() {
+        contexto.fillStyle = this.value; // El color del contexto es el color del input
+        document.getElementById("colorPreview").style.backgroundColor = this.value; // Mostrar color actual
+      };
+      
+      // Limpiar lienzo
+      document.getElementById("limpiar").onclick = function() {
+        contexto.clearRect(0, 0, lienzo.width, lienzo.height); // Borra todo el lienzo
+      };
+    </script>
+  </body>
+</html>
+

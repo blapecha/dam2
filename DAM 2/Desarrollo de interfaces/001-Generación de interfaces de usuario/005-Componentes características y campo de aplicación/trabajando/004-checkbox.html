@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo de Checkbox</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+        .checkbox-container {
+            margin: 20px 0;
+        }
+        .checkbox {
+            margin: 10px 0;
+        }
+        .selected-values {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Ejemplo de Checkbox</h1>
+
+<div class="checkbox-container">
+    <label class="checkbox">
+        <input type="checkbox" class="check" value="Opción 1"> Opción 1
+    </label>
+    <label class="checkbox">
+        <input type="checkbox" class="check" value="Opción 2"> Opción 2
+    </label>
+    <label class="checkbox">
+        <input type="checkbox" class="check" value="Opción 3"> Opción 3
+    </label>
+    <label class="checkbox">
+        <input type="checkbox" class="check" value="Opción 4"> Opción 4
+    </label>
+</div>
+
+<button id="submitBtn">Mostrar Opciones Seleccionadas</button>
+
+<div class="selected-values" id="selectedValues"></div>
+
+<script>
+    const checkboxes = document.querySelectorAll('.check');
+    const submitBtn = document.getElementById('submitBtn');
+    const selectedValues = document.getElementById('selectedValues');
+
+    submitBtn.onclick = function() {
+        const selected = [];
+        checkboxes.forEach((checkbox) => {
+            if (checkbox.checked) {
+                selected.push(checkbox.value);
+            }
+        });
+        selectedValues.innerHTML = "Opciones seleccionadas: " + (selected.length > 0 ? selected.join(', ') : "Ninguna");
+    }
+</script>
+
+</body>
+</html>

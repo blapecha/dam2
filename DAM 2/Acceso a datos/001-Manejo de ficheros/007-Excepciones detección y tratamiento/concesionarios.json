@@ -1,0 +1,10 @@
+{
+    "nombre": "Ford",
+    "emails": {
+        "personal": [],
+        "profesional": [
+            "ford@todocoches.com"
+        ]
+    },
+    "localidad": null
+}

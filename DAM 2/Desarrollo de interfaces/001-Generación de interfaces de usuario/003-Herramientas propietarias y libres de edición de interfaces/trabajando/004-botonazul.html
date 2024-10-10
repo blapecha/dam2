@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <style>
+      button{
+        width:225px;
+        height:225px;
+        background:url(botonazul.svg);
+        border:none;
+        cursor: pointer;
+      }
+    </style>
+    
+  </head>
+  <body>
+    <button aria-label="Bóton de alerta"></button>
+    <script>
+      document.querySelector("button").onclick = function(){
+        alert("Has hecho click")
+      }
+    </script>
+  </body>
+</html>

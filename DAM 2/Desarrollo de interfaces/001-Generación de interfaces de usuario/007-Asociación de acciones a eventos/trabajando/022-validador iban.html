@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      body {
+        display: flex;
+        justify-content: center; /* Centra horizontalmente */
+        align-items: center;     /* Centra verticalmente */
+        height: 100vh;          /* Altura del viewport */
+        background-color: #f0f0f0; /* Color de fondo */
+        font-family: Arial, sans-serif; /* Fuente */
+      }
+
+      input {
+        padding: 10px;           /* Espaciado interno */
+        border: 2px solid #007BFF; /* Borde azul */
+        border-radius: 5px;      /* Bordes redondeados */
+        width: 250px;            /* Ancho fijo */
+        font-size: 16px;         /* Tamaño de fuente */
+        transition: border-color 0.3s; /* Transición suave del color del borde */
+      }
+
+    </style>
+  </head>
+  <body>
+    <input class="dni" type="text" placeholder="Introduce tu DNI">
+    <script>
+      const entrada = document.querySelector(".dni");
+
+      // Función para calcular la letra del DNI
+      function calcularLetraDNI(dni) {
+        const letras = "TRWAGMYFPDXBNJZSQVHLCKET"; // Letras para DNI
+        const numero = parseInt(dni, 10); // Convierte la parte numérica a entero
+        return letras[numero % 23]; // Calcula la letra usando el módulo 23
+      }
+
+      entrada.onkeyup = function(e) {
+        // Permitir solo dígitos y letras
+        this.value = this.value.replace(/[^0-9a-zA-Z]/g, '');
+
+        // Limitar a 9 caracteres (8 dígitos + 1 letra)
+        if (this.value.length > 9) {
+          this.value = this.value.slice(0, 9);
+        }
+
+        // Validar el DNI cuando tenga 9 caracteres
+        if (this.value.length === 9) {
+          const numeroDNI = this.value.slice(0, 8);
+          const letraDNI = this.value.charAt(8).toUpperCase(); // La letra debe ser mayúscula
+          const letraCalculada = calcularLetraDNI(numeroDNI);
+
+          // Comprobar si la letra es correcta
+          if (letraDNI === letraCalculada) {
+            console.log("DNI correcto:", this.value);
+          } else {
+            console.log("DNI incorrecto:", this.value);
+          }
+        } else {
+          console.log("Introduce un DNI de 9 caracteres");
+        }
+      };
+    </script>
+  </body>
+</html>
