@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <video id="webcam" autoplay></video>
+    <canvas id="canvas"></canvas>
+    <canvas id="canvas2"></canvas>
+    <script>
+        const video = document.getElementById('webcam');                                    // Selecciono el video en el HTML    
+        const canvas = document.getElementById('canvas');                                   // Ahora selecciono el lienzo
+        const contexto = canvas.getContext('2d');                                           // Creo un contexto
+        
+        const canvas2 = document.getElementById('canvas2');                                 // Selecciono el segundo lienzo
+        const contexto2 = canvas2.getContext('2d');                                         // Creo un contexto para el segundo lienzo
+
+        const canvasWidth = 640;                                                            // Define la anchura deseada para los canvas
+        const canvasHeight = 480;                                                           // Define la altura deseada para los canvas
+
+        navigator.mediaDevices.getUserMedia({ video: true })                                // Del navegador, atrapo el feed de la cámara
+            .then((stream) => {                                                             // Y entonces
+                video.srcObject = stream;                                                   // El contenido del video es el feed de la cámara
+                video.addEventListener('loadedmetadata', () => {                            // Cuando el video ha cargado
+                    canvas.width = canvasWidth;                                             // Ajusto la anchura del canvas a la anchura deseada
+                    canvas.height = canvasHeight;                                           // Ajusto la altura del canvas a la altura deseada
+                    
+                    canvas2.width = canvasWidth;                                            // Ajusto la anchura del segundo canvas
+                    canvas2.height = canvasHeight;                                          // Ajusto la altura del segundo canvas
+                    
+                    function draw() {                                                       // Creo una funcion de dibujo que:
+                        contexto.drawImage(video, 0, 0, canvas.width, canvas.height);       // Pinta el contenido del video en el canvas
+                        contexto2.drawImage(video, 0, 0, canvas2.width, canvas2.height);    // Pinta el contenido del video en el segundo canvas
+                        
+                        requestAnimationFrame(draw);                                        // Una vez lo ha hecho, se llama a sí misma, (Es decir, un bucle)
+                    }
+                    draw();                                                                 // Llamo una primera vez a la función
+                });
+            })
+            .catch((err) => {                                                               // En el caso de que el navegador me dé algún tipo de error
+                console.error('Error accessing the webcam:', err);                          // Lanzo el error
+            });
+    </script>
+</body>
+</html>
