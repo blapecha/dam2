@@ -20,9 +20,10 @@
 					console.log(datos)                                              // Pongo los datos en consola solo para comprobar que me llegan
 					let conjunto = JSON.parse(datos)                                // Convierto los datos de string a array
 					console.log(conjunto)                                           // Lo pongo en console como debug para comprobar que todo va ok
-					let suma = 0;                                                   // Creo una suma inicial
+					let suma = 1;                                                   // Creo una suma inicial
 					for(let i = 0;i<conjunto.length;i++){                           // Recorro el array
-						suma += conjunto[i]                                           // Y al valor anterior le sumo lo que valga ese elemento del array
+						suma *= conjunto[i]                                           // Y al valor anterior le sumo lo que valga ese elemento del array
+						
 					}
 					///////////////// CLIENTE ---------> SERVIDOR //////////////////////////////////////////////////
 					fetch("008-resultado.php?resultado="+suma)                      // Y al final le devuelvo al servidor el resultado de la operacion

@@ -1,15 +1,37 @@
 <!doctype html>
-<html>
-	<head>
-	
-	</head>
-	<body>	<input>
-		<script>
-			var entrada = document.querySelector("input")
-			entrada.onchange = function(){
-				console.log("Ok te has identificado como",this.value)
-				fetch("003.php?usuario="+encodeURI(this.value))
-			}
-		</script>
-	</body>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identificación de Usuario</title>
+</head>
+<body>
+    <label for="usuario">Identifícate:</label>
+    <input type="text" id="usuario" placeholder="Introduce tu nombre">
+    
+    <script>
+        var entrada = document.querySelector("#usuario");
+        entrada.onchange = function() {
+            console.log("Ok, te has identificado como", this.value);
+            // Verificar que el valor no esté vacío
+            if (this.value.trim() !== "") {
+                fetch("003.php?usuario=" + encodeURIComponent(this.value))
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error en la red');
+                        }
+                        return response.text(); // O `response.json()` si esperas JSON
+                    })
+                    .then(data => {
+                        console.log("Respuesta del servidor:", data);
+                    })
+                    .catch(error => {
+                        console.error("Hubo un problema con la solicitud Fetch:", error);
+                    });
+            } else {
+                console.log("Por favor, introduce un nombre válido.");
+            }
+        };
+    </script>
+</body>
 </html>

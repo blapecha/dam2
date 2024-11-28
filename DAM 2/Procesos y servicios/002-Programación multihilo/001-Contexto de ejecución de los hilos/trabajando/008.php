@@ -1,7 +1,7 @@
 <?php
 	///////////////////// TAREAS /////////////////////////////////////////////////
 	
-    	$file = 'tareas.txt';				// Abro el archivo de tareas
+    	$file = 'tareasnumero.txt';				// Abro el archivo de tareas
 
     	$lines = file($file);				// Me lee el contenido de las tareas
 	$tarea = $lines[0];				// Se queda con la primera tarea

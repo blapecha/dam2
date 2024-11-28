@@ -14,7 +14,33 @@
 	
 	$json = file_get_contents("004-modelodedatos.json");							// Leo el contenido del schema
 	$datos = json_decode($json, true);																// Lo proceso como objeto de php
+	$tabla = $_GET['drop'];   // hago una funcionalidad para permitirme borrar tablas directamente por url
+	if($tabla=== "all"){
+		foreach ($datos as $dato) {	
+			$cadena = "DROP TABLE ".$dato;
+			mysqli_query($enlace,$cadena);
+			echo ("He borrado la tabla ".$tabla);
+			}
+	}
+	if(!is_null($tabla)){
+		$existeEnJson= false;
+		foreach($datos as $dato){
+			if($dato['nombre'] === $tabla){
+				$existeEnJson = true;
+			}
+		}
+		if($existeEnJson){
+		echo("Quieres borrar la tabla ".$tabla);
+		$miquery = "DROP TABLE ".$tabla;
+		echo("Ejecutando la query ".$miquery);
+		mysqli_query($enlace,$miquery);
+		}else{
+			echo("La tabla ".$tabla." no existe en el json");
+		}
 
+	}else{
+
+	
 	foreach ($datos as $dato) {																				// Para cada una de las tablas
 	    $nombredetabla = $dato['nombre'];															// Tomo el nombre de la tabla
 	    $cadena = "CREATE TABLE ".$nombredetabla." ( 
@@ -32,6 +58,8 @@
 			mysqli_query($enlace, $cadena);																// Ejecuto la peticioń contra la base de datos
 
 	}
+}
+
 	
 ?>
 

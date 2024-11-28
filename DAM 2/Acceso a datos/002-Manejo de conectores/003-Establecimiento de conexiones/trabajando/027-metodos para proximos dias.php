@@ -1,19 +1,19 @@
 <?php
-	ini_set('display_errors', 1);												// Activo errores
-	ini_set('display_startup_errors', 1);								// Activo errores de inicio
-	error_reporting(E_ALL);															// 
+	ini_set('display_errors', 1);									// Activo errores
+	ini_set('display_startup_errors', 1);							// Activo errores de inicio
+	error_reporting(E_ALL);											// 
 	
-	class conexionDB{																		// Creo una nueva clase
+	class conexionDB{												// Creo una nueva clase
 		
-			private $servidor;															// creo una serie de propiedades privadas
-			private $usuario;																// 
-			private $contrasena;														// 
-			private $basededatos;														// 
-			private $conexion;															// 
+			private $servidor;										// creo una serie de propiedades privadas
+			private $usuario;										// 
+			private $contrasena;									// 
+			private $basededatos;									// 
+			private $conexion;										// 
 			
-			public function __construct() {									// Creo un constructor
-        $this->servidor = "localhost";								// Le doy los datos de acceso a la base de datos
-        $this->usuario = "accesoadatos";							// 
+			public function __construct() {						// Creo un constructor
+        $this->servidor = "localhost";							// Le doy los datos de acceso a la base de datos
+        $this->usuario = "accesoadatos";						// 
         $this->contrasena = "accesoadatos";						// 
         $this->basededatos = "accesoadatos";					// 
         
@@ -32,12 +32,21 @@
 						//$resultado[] = $row;											// Los añado al array
 						$fila = [];
 						foreach($row as $clave=>$valor){
-							$fila[$clave] = $this->codifica($valor);
+							$fila[$clave] = $valor;
 						}
 						$resultado[] = $fila;
 				}
 				$json = json_encode($resultado, JSON_PRETTY_PRINT);		// Lo codifico como json
-				return $json;																	// Devuelvo el json
+				return $json;										// Devuelvo el json
+			}
+
+			public function mostrarNombreTablas(){
+				$query ="SHOW TABLES;";
+				$result = mysqli_query($this->conexion , $query);		// Ejecuto la peticion
+				$resultado = [];	
+				while ($row = mysqli_fetch_assoc($result)) {
+					echo $row['Tables_in_accesoadatos']."</br>";
+					}
 			}
 			
 			public function insertaTabla($tabla,$valores){
@@ -60,8 +69,12 @@
 			}
 	}
 	
-	$conexion = new conexionDB();												//
-	
-	echo $conexion->seleccionaTabla("empleados");												//
-	
+	$conexion = new conexionDB();	  //
+	$tabla = $_GET['mitabla'];   
+	if ($tabla!==null){
+		echo $conexion->seleccionaTabla($tabla);
+		echo "</br>";
+		echo "</br>";
+	}
+	$conexion->mostrarNombreTablas();
 ?>

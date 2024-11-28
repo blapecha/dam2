@@ -10,3 +10,67 @@ Al usuarioborja le ha tocado la tarea: [8765, 6543, 3210, 765, 432, 543, 345, 43
 
 Al usuarioBlanca le ha tocado la tarea: [345, 765, 123, 432, 987, 234, 567, 543, 234, 876, 345, 987, 543, 987, 123, 987, 543, 234, 876, 432]
 
+Al usuario le ha tocado la tarea: [876, 543, 432, 345, 876, 543, 123, 654, 234, 543, 765, 876, 234, 987, 654, 432, 987, 765, 345, 654]
+
+Al usuariohola  le ha tocado la tarea: [9876, 5432, 8765, 7654, 3210, 5432, 987, 432, 765, 876, 543, 345, 987, 543, 234, 987, 432, 987, 876, 765]
+
+Al usuariobla le ha tocado la tarea: [543, 876, 123, 432, 765, 654, 876, 345, 987, 654, 987, 123, 765, 987, 543, 234, 876, 654, 432, 987]
+
+Al usuarioccccccaaa le ha tocado la tarea: ["Estudiar","hacer la compra","ejercicio"]
+Al usuarioluna le ha tocado la tarea: 
+Al usuariomierc le ha tocado la tarea: [432, 876, 987, 123, 543, 987, 765, 123, 543, 876, 234, 987, 876, 543, 432, 987, 765, 432, 876, 123]
+
+Al usuariofsgfsfsf le ha tocado la tarea: [987, 876, 543, 987, 654, 432, 987, 765, 543, 876, 432, 987, 543, 876, 987, 234, 765, 987, 432, 876]
+
+Al usuarioiopi le ha tocado la tarea: [432, 876, 543, 987, 123, 765, 987, 543, 987, 765, 432, 876, 345, 987, 543, 765, 987, 432, 654, 987]
+
+Al usuario`poìop le ha tocado la tarea: 
+Al usuariodavid le ha tocado la tarea: 
+Al usuario hola le ha tocado la tarea: ["planchar","Estudiar","hacer la compra","ejercicio"]
+
+Al usuario margarita le ha tocado la tarea: ["repasar","Estudiar","hacer la compra","ejercicio"]
+
+Al usuariorudorl le ha tocado la tarea: ["conducir","Estudiar","hacer la compra","ejercicio"]
+
+Al usuariomaria le ha tocado la tarea: ["planchar","Estudiar","hacer la compra","ejercicio"]
+
+Al usuario faaaa le ha tocado la tarea: ["planchar","Estudiar","hacer la compra","ejercicio"]
+
+Al usuario fklkjk le ha tocado la tarea: ["programar","Estudiar","hacer la compra","ejercicio"]
+
+Al usuariomaria le ha tocado la tarea: ["conducir","Estudiar","hacer la compra","ejercicio"]
+
+Al usuariolucia le ha tocado la tarea: ["repasar","Estudiar","hacer la compra","ejercicio"]
+
+Al usuariolljkjk le ha tocado la tarea: ["programar","Estudiar","hacer la compra","ejercicio"]
+
+Al usuariojaun le ha tocado la tarea: ["conducir","Estudiar","hacer la compra","ejercicio"]
+
+Al usuario le ha tocado la tarea: ["repasar","Estudiar","hacer la compra","ejercicio"]
+
+Al usuariohola  le ha tocado la tarea: ["planchar","Estudiar","hacer la compra","ejercicio"]
+
+Al usuario  le ha tocado la tarea: ["repasar","Estudiar","hacer la compra","ejercicio"]
+
+Al usuario  le ha tocado la tarea: ["conducir","Estudiar","hacer la compra","ejercicio"]
+
+Al usuario blanca le ha tocado la tarea: ["programar","Estudiar","hacer la compra","ejercicio"]
+
+Al usuario lllll le ha tocado la tarea: ["programar","Estudiar","hacer la compra","ejercicio"]
+
+Al usuario  le ha tocado la tarea: ["conducir","Estudiar","hacer la compra","ejercicio"]
+
+Al usuariokjlkjlkj le ha tocado la tarea: ["conducir","Estudiar","hacer la compra","ejercicio"]
+
+Al usuariogsfsfg le ha tocado la tarea: ["4","12","20","15"]
+
+Al usuariogdhagjfdk le ha tocado la tarea: [4,12,20,15]
+
+Al usuariokjlj le ha tocado la tarea: [4,12,20,15,100,10]
+
+Al usuariod le ha tocado la tarea: [4,12,20,15]
+
+Al usuariodd le ha tocado la tarea: [4,12,20,15]
+
+Al usuariossss le ha tocado la tarea: [4,12,20,15]
+

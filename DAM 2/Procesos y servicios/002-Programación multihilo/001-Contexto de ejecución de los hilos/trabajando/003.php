@@ -1,6 +1,7 @@
 <?php
-	$myfile = fopen("usuarios.txt", "a");
-	$txt = $_GET['usuario']."\n";
-	fwrite($myfile, $txt);
-	fclose($myfile);
+    $myfile = fopen("usuarios.txt", "a");
+    $txt = $_GET['usuario'] . "\n";
+    fwrite($myfile, $txt);
+    fclose($myfile);
+    echo "Hola " . htmlspecialchars($_GET['usuario']) . ", has sido identificado correctamente!";
 ?>

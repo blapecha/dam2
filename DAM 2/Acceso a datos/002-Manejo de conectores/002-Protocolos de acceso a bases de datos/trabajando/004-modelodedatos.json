@@ -71,7 +71,29 @@
 				"longitud":""
 			}
 		]
+	},
+	{
+		"nombre":"coches",
+		"columnas":[
+			{
+				"nombre":"nombre",
+				"tipo":"VARCHAR",
+				"longitud":"255"
+			},
+			{
+				"nombre":"descripcion",
+				"tipo":"TEXT",
+				"longitud":""
+			}
+			,
+			{
+				"nombre":"anyo",
+				"tipo":"INT",
+				"longitud":"255"
+			}
+		]
 	}
+
 ]
 
 

@@ -74,14 +74,6 @@
       function animar() {                                                     // Realmente es la función de bucle
         esfera.position.x = x
         esfera.position.y = y
-        
-        // Cambiar el color de la esfera al moverla
-        if (x > 0) {
-          esfera.material.color.set(0x00ff00); // Verde
-        } else {
-          esfera.material.color.set(0x0000ff); // AZUL
-        }
-         
         requestAnimationFrame(animar);                                        // Llama de nuevo al bucle en cuanto puedas
         representador.render(escena, camara);                                 // Renderizar la escena desde la perspectiva de la cámara
       }

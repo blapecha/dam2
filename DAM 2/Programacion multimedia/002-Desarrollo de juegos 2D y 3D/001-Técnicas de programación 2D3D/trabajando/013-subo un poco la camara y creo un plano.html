@@ -38,10 +38,12 @@
       const cubo = new THREE.Mesh(geometria, material);                       // Creo un nuevo cubo uniendo la geometría con el material
       escena.add(cubo);                                                       // en la escena añado el cubo
       
-      const geometria2 = new THREE.BoxGeometry();                              // Instancio una geometría vacía
-      const material2 = new THREE.MeshPhongMaterial({ color: 0x0000ff });      // Creo un nuevo material
-      const cubo2 = new THREE.Mesh(geometria2, material2);                       // Creo un nuevo cubo uniendo la geometría con el material
-      escena.add(cubo2);                                                       // en la escena añado el cubo
+      const geometriaesfera = new THREE.SphereGeometry(0.5, 32, 16);          // Instancio una geometría vacía
+      const materialesfera = new THREE.MeshPhongMaterial({ color: 0x00ff00 }); // Le creo un nuevo material de tipo Phong
+      const esfera = new THREE.Mesh(geometriaesfera,materialesfera)           // Creo  una nueva esfera con la geomtría y el material
+      esfera.position.x = 2                                                   // Muevo la esfera dos unidades en X
+      escena.add(esfera);                                                     // añado la esfera a la escena
+      
       /*////////////////////// CREAMOS OBJETOS EN PANTALLA //////////////////////////*/ 
       
       /*////////////////////// CREAMOS LUCES EN PANTALLA //////////////////////////*/ 
@@ -66,34 +68,17 @@
       }
       
       // Controles para mover al jugador con las teclas del teclado ////////////////////////////////
-
-      //////////////////////////Algunas funciones nuevas   //////////////////////////////////////////
+      
       camara.position.z = 5;                                                  // Muevo la cámara un poco hacia atrás
       camara.position.y = 2;
       
       function animar() {                                                     // Realmente es la función de bucle
-        cubo2.position.x = x
-        cubo2.position.y = y
-       
-        coincidir(); 
+        esfera.position.x = x
+        esfera.position.y = y
         requestAnimationFrame(animar);                                        // Llama de nuevo al bucle en cuanto puedas
         representador.render(escena, camara);                                 // Renderizar la escena desde la perspectiva de la cámara
       }
-      
-      function coincidir(){
-        if (cubo2.position.x > 0 && cubo2.position.x < 0.001){             // solucion error de precision x era 0.0001 no es igual a 0
-          cubo2.position.x = 0;
-        }
-        console.log(" x1 "+cubo.position.x+" x2 "+cubo2.position.x+" y1 "+cubo.position.y+" y2 "+cubo2.position.y)
-        if(cubo.position.x === cubo2.position.x && cubo.position.y === cubo2.position.y){
-        cubo2.material.color.set(0xf7ff10);                    ////// Cambiar el color a amarillo si coinciden
-      } else {
-        cubo2.material.color.set(0x0000ff);                   //// en caso de no coincidir pon color original
-      }
-    }
       animar();                                                               // Iniciar la animación
-    
-      //////////////////////////Algunas funciones nuevas   //////////////////////////////////////////
     </script>
   </body>
 </html>
