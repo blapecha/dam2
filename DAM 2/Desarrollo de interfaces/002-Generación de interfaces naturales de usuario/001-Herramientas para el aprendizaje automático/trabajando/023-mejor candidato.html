@@ -10,11 +10,6 @@
 <body>
     <input type="text" id="cajaentrenamiento">
     <button id="procesa">Procesa!</button><br>
-   <!-- <select id="colores">
-        <option value="red">Rojo</option>
-        <option value="green">Verde</option>
-        <option value="blue">Azul</option>
-    </select>-->
     <video id="webcam" autoplay></video>
     <canvas id="canvas"></canvas>
     <canvas id="canvas2"></canvas>
@@ -24,9 +19,6 @@
     <script>
         ///////////////////////////////////////////// DECLARACIÓN DE VARIABLES GLOBALES //////////////////////////////////////////////////////
         
-        var valorrojo= 255
-        var valorazul=255
-        var valorverde=255
         var memoria = [];                                                                   // Creo una memoria vacía
         var neuronas = []                                                                   // Creo un conjunto de neuronas vacío
         var cadenamemoria = ""
@@ -49,27 +41,18 @@
         const canvas4 = document.getElementById('canvas4');                                   // Ahora selecciono el lienzo
         const contexto4 = canvas4.getContext('2d');                                           // Creo un contexto
         
-       /*
-        const colores= document.getElementById('colores');
-
-        function cambiarColor(event) {
-        const colorSeleccionado = event.target.value;
-        document.body.style.backgroundColor = colorSeleccionado || 'white';
-        }
-
-        colores.addEventListener('change', cambiarColor);
-  */
-      
        ///////////////////////////////////////////// LIENZOS Y CONTEXTOS //////////////////////////////////////////////////////
        
         ///////////////////////////////////////////// STREAM DE CAMARA //////////////////////////////////////////////////////
         async function getSecondWebcam() {
             const devices = await navigator.mediaDevices.enumerateDevices();                // Obtenemos todos los dispositivos
+            debugger 
             const videoDevices = devices.filter(device => device.kind === 'videoinput');    // Filtramos para obtener solo dispositivos de video
 
             if (videoDevices.length > 1) {
-                
+                debugger
                 const secondWebcamId = videoDevices[0].deviceId;                            // Tomamos la segunda cámara
+
                 navigator.mediaDevices.getUserMedia({ video: { deviceId: secondWebcamId } }) // Seleccionamos la segunda cámara
                     .then((stream) => {                                                     // Y entonces
                         video.srcObject = stream;                                           // El contenido del video es el feed de la cámara
@@ -92,8 +75,6 @@
                             
                                 ///////////////////////////////////////////// HALLAR BORDES //////////////////////////////////////////////////////
                                 
-        
-                                
                                 contexto.drawImage(video, 0, 0, canvas.width, canvas.height); // Pinta el contenido del video en el canvas
                                 var datos = contexto.getImageData(0, 0, canvas.width, canvas.height); // Cargo en memoria todos los datos del canvas 1
                                 let umbral = 5;
@@ -107,10 +88,10 @@
                                         datos.data[i + 1] = 0;
                                         datos.data[i + 2] = 0;
                                     } else {
-                                        datos.data[i] = valorrojo;                                 // O bien los pinto blanco
-                                        datos.data[i + 1] = valorazul;
-                                        datos.data[i + 2] = valorverde;
-                                    } 
+                                        datos.data[i] = 255;                                 // O bien los pinto blanco
+                                        datos.data[i + 1] = 255;
+                                        datos.data[i + 2] = 255;
+                                    }
                                 }
                                 contexto2.putImageData(datos, 0, 0);                         // Pongo la imagen en blanco y negro
                                 

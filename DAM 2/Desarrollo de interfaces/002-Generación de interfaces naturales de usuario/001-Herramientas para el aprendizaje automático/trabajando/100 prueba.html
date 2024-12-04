@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        canvas,video { width: 300px; } /* Establece el ancho de los elementos canvas y video */
+        #canvas4 { 
+            width: 512px; 
+            height: 512px; 
+            border: 1px solid grey; 
+            image-rendering: pixelated; 
+        } /* Define estilo para el cuarto canvas */
+    </style>
+</head>
+<body>
+    <input type="text" id="cajaentrenamiento"> <!-- Campo de texto para entrada de datos -->
+    <button id="procesa">Procesa!</button><br> <!-- Botón para procesar datos -->
+    <select id="colores"> <!-- Desplegable para seleccionar color -->
+        <option value="">-- Selecciona un color --</option> <!-- Opción inicial -->
+        <option value="red">Rojo</option> <!-- Opción para rojo -->
+        <option value="green">Verde</option> <!-- Opción para verde -->
+        <option value="blue">Azul</option> <!-- Opción para azul -->
+    </select>
+    <video id="webcam" autoplay></video> <!-- Elemento video para mostrar la webcam -->
+    <canvas id="canvas"></canvas> <!-- Primer canvas -->
+    <canvas id="canvas2"></canvas> <!-- Segundo canvas -->
+    <canvas id="canvas3"></canvas> <!-- Tercer canvas -->
+    <canvas id="canvas4"></canvas> <!-- Cuarto canvas para visualización de memoria -->
+    <h1>Esto es...<span id="resultado"></span></h1> <!-- Muestra resultados aprendidos -->
+    <script>
+        // Variables globales
+        var valorrojo = 255; // Valor inicial para el color rojo
+        var valorazul = 255; // Valor inicial para el color azul
+        var valorverde = 255; // Valor inicial para el color verde
+        var memoria = []; // Array vacío para almacenar memorias
+        var neuronas = []; // Array vacío para almacenar neuronas
+        var cadenamemoria = ""; // Cadena que representa la memoria actual
+        var anchura = 3; // Anchura de las secciones en píxeles
+        var combinaciones = Math.pow(2, anchura * anchura); // Total de combinaciones posibles
+
+        console.log("Las combinaciones son: ", combinaciones); // Muestra las combinaciones en la consola
+
+        // Cambio de fondo
+        const colores = document.getElementById('colores'); // Selecciona el desplegable de colores
+
+        function cambiarColor(event) { // Función para cambiar el fondo
+            const colorSeleccionado = event.target.value; // Obtiene el valor seleccionado
+            document.body.style.backgroundColor = colorSeleccionado || 'white'; // Cambia el color del fondo
+        }
+
+        colores.addEventListener('change', cambiarColor); // Asigna el evento 'change' al desplegable
+
+        // Configuración de lienzos y contextos
+        const video = document.getElementById('webcam'); // Elemento video
+        const canvas = document.getElementById('canvas'); // Primer canvas
+        const contexto = canvas.getContext('2d'); // Contexto del primer canvas
+
+        const canvas2 = document.getElementById('canvas2'); // Segundo canvas
+        const contexto2 = canvas2.getContext('2d'); // Contexto del segundo canvas
+
+        const canvas3 = document.getElementById('canvas3'); // Tercer canvas
+        const contexto3 = canvas3.getContext('2d'); // Contexto del tercer canvas
+
+        const canvas4 = document.getElementById('canvas4'); // Cuarto canvas
+        const contexto4 = canvas4.getContext('2d'); // Contexto del cuarto canvas
+
+        // Obtener y configurar la webcam
+        async function getSecondWebcam() {
+            const devices = await navigator.mediaDevices.enumerateDevices(); // Obtiene todos los dispositivos
+            const videoDevices = devices.filter(device => device.kind === 'videoinput'); // Filtra solo cámaras
+
+            if (videoDevices.length > 1) { // Verifica si hay más de una cámara
+                const secondWebcamId = videoDevices[0].deviceId; // Selecciona la primera cámara disponible
+
+                navigator.mediaDevices.getUserMedia({ video: { deviceId: secondWebcamId } }) // Solicita acceso a la cámara
+                    .then((stream) => { // Si se concede acceso
+                        video.srcObject = stream; // Asigna el stream de video al elemento video
+                        video.addEventListener('loadedmetadata', () => { // Evento cuando el video carga
+                            canvas.width = video.videoWidth; // Ajusta ancho del canvas al video
+                            canvas.height = video.videoHeight; // Ajusta alto del canvas al video
+
+                            canvas2.width = video.videoWidth; // Ajusta ancho del segundo canvas
+                            canvas2.height = video.videoHeight; // Ajusta alto del segundo canvas
+
+                            canvas3.width = video.videoWidth; // Ajusta ancho del tercer canvas
+                            canvas3.height = video.videoHeight; // Ajusta alto del tercer canvas
+
+                            canvas4.width = 24; // Ancho fijo para el cuarto canvas
+                            canvas4.height = 24; // Alto fijo para el cuarto canvas
+
+                            function draw() { // Función principal de dibujo
+                                contexto.drawImage(video, 0, 0, canvas.width, canvas.height); // Dibuja el video en el primer canvas
+                                requestAnimationFrame(draw); // Llama a la función de nuevo (bucle de animación)
+                            }
+
+                            draw(); // Llama a la función de dibujo por primera vez
+                        });
+                    })
+                    .catch((err) => { // Si ocurre un error
+                        console.error('Error accessing the second webcam:', err); // Muestra el error
+                    });
+            } else {
+                console.error("Only one webcam available or no webcams found."); // Si no hay suficiente cámaras
+            }
+        }
+
+        getSecondWebcam(); // Llama a la función para configurar la webcam
+
+        // Evento para el botón "Procesa!"
+        document.querySelector("button").onclick = function() { 
+            memoria.push({
+                "identificador": document.querySelector("input").value, // Toma el valor del input
+                "datos": cadenamemoria // Guarda la memoria actual
+            });
+            console.log(memoria); // Muestra la memoria en la consola
+        }
+    </script>
+</body>
+</html>
+
