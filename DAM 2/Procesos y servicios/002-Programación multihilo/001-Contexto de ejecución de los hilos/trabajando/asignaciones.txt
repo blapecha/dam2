@@ -74,3 +74,11 @@ Al usuariodd le ha tocado la tarea: [4,12,20,15]
 
 Al usuariossss le ha tocado la tarea: [4,12,20,15]
 
+Al usuario 33565180S le ha tocado la tarea: ["programar","Estudiar","hacer la compra","ejercicio"]
+Al usuario blanca le ha tocado la tarea: ["repasar","Estudiar","hacer la compra","ejercicio"]
+Al usuario Blanca le ha tocado la tarea: ["conducir","Estudiar","hacer la compra","ejercicio"]
+Al usuario luz le ha tocado la tarea: ["repasar","Estudiar","hacer la compra","ejercicio"]
+Al usuario bla le ha tocado la tarea: ["planchar","Estudiar","hacer la compra","ejercicio"]
+Al usuarioblanca le ha tocado la tarea: ["programar","Estudiar","hacer la compra","ejercicio"]
+
+Al usuario Blanca le ha tocado la tarea: ["repasar","Estudiar","hacer la compra","ejercicio"]
