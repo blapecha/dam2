@@ -99,13 +99,27 @@
       camara.position.z = 5;                                                  // Muevo la cámara un poco hacia atrás
       camara.position.y = 2;
       
-      function animar() {                                                     // Realmente es la función de bucle
-        esfera.position.x = x
-        esfera.position.y = y
-        requestAnimationFrame(animar);                                        // Llama de nuevo al bucle en cuanto puedas
-        representador.render(escena, camara);                                 // Renderizar la escena desde la perspectiva de la cámara
+       
+       function detectarColision(obj1, obj2) {                                         // Función para comprobar colisión
+        const distancia = obj1.position.distanceTo(obj2.position);
+        return distancia < 0.5 + 0.5;                                               // Radio de la esfera + mitad del tamaño del cubo
       }
-      animar();                                                               // Iniciar la animación
+
+      function animar() {
+        esfera.position.x = x;
+        esfera.position.y = y;
+        
+        
+        if (detectarColision(esfera, cubo)) {                                                  // Comprobar colisión y cambiar color
+          esfera.material.color.set(0x0000ff);                                          // Cambiar a azul
+        } else {
+          esfera.material.color.set(0x00ff00);                                          // Volver a verde
+        }
+        
+        requestAnimationFrame(animar);
+        representador.render(escena, camara);
+      }
+      animar();
     </script>
   </body>
 </html>

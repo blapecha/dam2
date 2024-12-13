@@ -11,6 +11,7 @@
       <option value="p2">Soy el jugador 2 (blancas)</option>
       <option value="p0">Soy un espectador</option>
     </select>
+    <button id="botoniniciar" disabled>Iniciar Partida</button>
     <div id="tablero"></div>
 
     <script>
@@ -21,9 +22,18 @@
 
       // Player selection
       let selector = document.querySelector("#seleccionajugador");
-      selector.onchange = function () {
+      let botonIniciar =document.querySelector("#botoniniciar");
+      selector.addEventListener("change", function  () {
         jugador = this.value;
-      };
+        if (jugador !== "") {
+         
+          botonIniciar.disabled = false; //  Empezara la partida al pulsar el boton con el rol seleccionado
+        }
+      });
+      botonIniciar.addEventListener("click",  function () {
+        location.reload()
+        
+      });
 
       // Initialize the board
       let tablero = document.querySelector("#tablero");
