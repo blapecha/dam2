@@ -5,10 +5,12 @@ class Producto:
                     nuevonombre,
                     nuevadescripcion,
                     nuevoprecio,
-                     nuevascategorias):
+                    nuevatalla,
+                    nuevascategorias):
         self.nombre = nuevonombre
         self.descripcion = nuevadescripcion
         self.precio = nuevoprecio
+        self.talla = nuevatalla
         self.categorias =  nuevascategorias
 clase = "Producto"
 
@@ -27,8 +29,10 @@ cursor = conexion.cursor()
 
 personas = []
 
-personas.append(Producto("Camiseta","Camiseta fenomenal para el dia a dia",34.56,['ropa','caballero']))
-personas.append(Producto("Pantalon","Pantalon para vestir de noche",56.43,['ropa','señora']))
+personas.append(Producto("Camiseta","Camiseta fenomenal para el dia a dia",34.56,"L",['ropa','caballero']))
+personas.append(Producto("Pantalon","Pantalon para vestir de noche",56.43,"s",['ropa','señora']))
+personas.append(Producto("sport","deportiva fenomenal para el dia a dia",34.56,"44",['zapato','caballero']))
+personas.append(Producto("tacon","tacon para vestir de noche",56.43,"38",['zapato','señora']))
 
 ##################################### BORRAMOS LA TABLA ANTERIOR POR SI ACASO HAY DATOS ANTERIOR
 
@@ -46,8 +50,10 @@ for atributo in atributos:                                                      
         peticion += atributo+" VARCHAR(255) NOT NULL ,"                                     # Los encadeno a la peticion
     else:
         peticion2 = "DROP TABLE IF EXISTS "+atributo+""
+        print(peticion2)
         cursor.execute(peticion2)
         peticion2 = "CREATE TABLE IF NOT EXISTS "+atributo+" (Identificador INT NOT NULL AUTO_INCREMENT,FK INT(255),"+atributo+" VARCHAR(255),PRIMARY KEY (Identificador))"
+        print(peticion2)
         cursor.execute(peticion2)
 
 
@@ -68,9 +74,11 @@ for indice, persona in enumerate(personas):
         else:
             for elemento in getattr(persona, atributo):
                 peticion2 = "INSERT INTO "+atributo+" VALUES(NULL,"+str(indice+1)+",'"+str(elemento)+"')"
+                print(peticion2)
                 cursor.execute(peticion2) 
     peticion = peticion[:-1]                                                            # Le quito la ultima coma
     peticion += ");"                                                                    # Le encadeno el parentesis final
+    print(peticion)
     cursor.execute(peticion)                                                            # Ejecuto la peticion
     
 conexion.commit()                                                                       # Lo lanzo todo contra el servidor

@@ -23,7 +23,7 @@ conexion = mysql.connector.connect(
 cursor = conexion.cursor()
 for persona in personas:
     peticion = f"""
-                INSERT INTO personas VALUES (NULL,'{persona.nombre}','{persona.apellidos}',{persona.edad});
+                INSERT INTO personas(`nombre`,`apellidos`,`edad`) VALUES ('{persona.nombre}','{persona.apellidos}',{persona.edad});
                 """
     cursor.execute(peticion)
 conexion.commit()

@@ -4,7 +4,6 @@ class Profesor:
     def __init__(self,
                     nuevonombre,
                     nuevadescripcion,
-                    
                      nuevosalumnos):
         self.nombre = nuevonombre
         self.descripcion = nuevadescripcion
@@ -27,7 +26,7 @@ cursor = conexion.cursor()
 profesores = []
 
 profesores.append(Profesor("Jose Vicente","Profesor de informatica",['Albert','Jose Manuel','Dragos']))
-
+profesores.append(Profesor("Alicia","Profesor de ingles",['Albert','Jose Manuel','Dragos']))
 
 ##################################### BORRAMOS LA TABLA ANTERIOR POR SI ACASO HAY DATOS ANTERIOR
 
