@@ -26,17 +26,19 @@
     </style>
   </head>
   <body>
-    <select>
-      <option value="Juan">Juan</option>
-      <option value="Jorge">Jorge</option>
-      <option value="Javier">Javier</option>
-      <option value="Jose">Jose</option>
-      <option value="Julian">Julian</option>
-      <option value="Jaime">Jaime</option>
-    </select>
+       <select id="miSelect">
+    
+          <option value="Juan">Juan</option>
+          <option value="Jorge">Jorge</option>
+          <option value="Javier">Javier</option>
+          <option value="Jose">Jose</option>
+          <!-- <option value="Julian">Julian</option> -->
+          <option value="Jaime">Jaime</option>
+        </select>
     <script>
       let selectores = document.querySelectorAll("select");                     // Selecciono todos los selectores de la pagina
       selectores.forEach(function(selector){                                    // Para cada uno de los selectores               
+        let originalSelect = selector;
         let contenedor = document.createElement("div")                          // Creo un div
         contenedor.classList.add("selectjv")                                    // Le pongo una clase
         document.querySelector("body").appendChild(contenedor)                  // En el body añado el contenedor
@@ -57,7 +59,16 @@
           buscador.setAttribute("placeholder","busca...")                       // Le pongo un placeholder
           resultados.appendChild(buscador)                                      // Lo añado al buscador
           buscador.onkeyup = function(){
-            console.log(this.value)
+            let miSelector =originalSelect
+            let valores =[]
+            for (let i=0;i<miSelector.options.length;i++){
+              valores.push(miSelector.options[i].value)
+            }
+            if(valores.includes(this.value)){
+              alert("El valor "+this.value+" existe")
+            }else{
+              console.log("El valor "+this.value+" No existe")
+            }
           }
           let opciones = selector.querySelectorAll("option")                    // Selecciono las opciones
           opciones.forEach(function(opcion){                                    // Y para cada una de las opciones

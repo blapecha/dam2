@@ -1,13 +1,26 @@
-
-let texto = "Jose Vicente"
+class Persona {
+  constructor(nombre,valor,apellido){
+    this.nombre=nombre
+    this.valor=valor
+    this.apellido=apellido
+  }
+  getNombreYapellidos(){
+    return this.nombre+" "+this.apellido
+    
+  }
+}
+personas=[]
+personas.push(new Persona("Fran","15","Gomez"))
+personas.push(new Persona("Blanca","13","Ramirez"))
+personas.push(new Persona("Alicia","4","Lopez"))
 
 let contenedor = document.querySelector("#contenedor")
 let selector = document.createElement("select")
 contenedor.appendChild(selector)
-for(let i = 0;i<10;i++){
+for(let persona of personas){
 	let opcion = document.createElement("option")
-	opcion.textContent = texto[i]
-	opcion.value=i
+	opcion.textContent = persona.getNombreYapellidos()
+	opcion.value=persona.valor
 	selector.appendChild(opcion)
 }
 selectjv(selector)
