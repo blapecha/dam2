@@ -72,6 +72,7 @@
 				<article>
 					<h3>Asunto:<input type="text" id="asunto"></h3>
 					<h4>Para:<input type="text" id="para"></h4>
+					<h4>De:<input type="text" id="de"></h4>
 					<p>Mensaje: <textarea id="mensaje"></textarea>
 					<button>Enviar</button>
 				</article>
@@ -123,6 +124,7 @@
 					"asunto":document.querySelector("#asunto").value,
 					"para":document.querySelector("#para").value,
 					"mensaje":document.querySelector("#mensaje").value,
+					"de":document.querySelector("#de").value
 				}
 				fetch("http://localhost:5000/enviar",{
 				  method: 'POST',

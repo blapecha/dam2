@@ -11,6 +11,10 @@ def handle_client(client_socket, addr):                                         
         try:                                                                            # Intento por si da error
             message = client_socket.recv(1024).decode('utf-8')                          # Intento recibir un mensaje del cliente (max 1024 b, y lo decodifico por si lleva caracteres especiales
             mensajes.append(message)
+            if message == "salir":                                                       # Si el mensaje es "exit"
+                exit()                                                                  # Salgo del programa
+            if message == "borrar":
+                mensajes = []
             if not message:                                                             # Si ya no recibo mensajes
                 print(f"El cliente {addr} ha cerrado la conexión.")                     # Asumo que el cliente se ha desconectado
                 break                                                                   # Rompo la conexión con el cliente
@@ -30,7 +34,7 @@ def handle_client(client_socket, addr):                                         
 
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)                              # Creamos un nuevo servidor de sockets
-server.bind(('5.250.188.70', 9999))                                                        # Especifico ruta y puerto de escucha
+server.bind(('127.0.0.1', 9999))                                                        # Especifico ruta y puerto de escucha
 server.listen(5)                                                                        # Indico el máximo de cola para entrar
 
 print("El servidor esta escuchando en: 9998...")

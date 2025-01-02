@@ -23,7 +23,8 @@ def enviar_email():
     asunto = data.get("asunto")
     para = data.get("para")
     mensaje = data.get("mensaje")
-    enviar("dam@jocarsa.com", para, asunto, mensaje)
+    de = data.get("de")
+    enviar(de, para, asunto, mensaje)
     return jsonify({"status": "ok", "message": "ok"}), 200
 
 @app.route("/recibir_por_fecha/<fecha>")

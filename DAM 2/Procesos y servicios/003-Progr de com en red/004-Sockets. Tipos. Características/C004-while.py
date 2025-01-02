@@ -11,7 +11,7 @@ def clear_screen():
 
 cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)                     # Creo un cliente
 
-cliente.connect(('localhost', 9993))                                            # Me conecto en la dirección y el puerto donde SÉ que hay un servidor escuchando
+cliente.connect(('localhost', 9999))                                            # Me conecto en la dirección y el puerto donde SÉ que hay un servidor escuchando
 
 while True:                                                                     # entro en un bucle
     mimensaje = input("Dime tu mensaje: ")                                      # Atrapo la entrada del usuario
