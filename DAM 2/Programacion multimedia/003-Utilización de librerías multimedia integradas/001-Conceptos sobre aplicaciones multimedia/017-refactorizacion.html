@@ -54,7 +54,10 @@
 		</style>
 	</head>
 	<body>
-		<video src="entrevista.mp4"></video>
+		<video >
+			<source src="entrevista.mp4" type="video/mp4">
+			<track src="subtitle.vtt" kind="subtitles" srclang="en" label="English">
+		</video>
 
 		<script>
 			
@@ -135,7 +138,22 @@
 						tagvideo.volume = this.value/100
 					}
 					
+										/*////////////////////// BOTÓN DE MUTEAR //////////////////////*/
 					
+										let botonmute = document.createElement("button")	// Creo un boton
+					botonmute.innerHTML = "<img src='speaker.svg'>"								// Le pongo el icono	
+					barracontroles.appendChild(botonmute)					// Lo añado al contenedor		
+					
+					botonmute.onclick = function(){							// Cuando haga click en el boton de play
+						if(tagvideo.muted){
+							botonmute.innerHTML = "<img src='speaker.svg'>"
+							tagvideo.muted = false
+						}else{
+							botonmute.innerHTML = "<img src='mute.svg'>"
+							tagvideo.muted = true
+						}
+					}
+			
 					
 					/*////////////////////// BOTÓN DE RETROCEDER //////////////////////*/
 					
@@ -155,6 +173,17 @@
 					
 					botonavanzar.onclick = function(){							// Cuando haga click en el boton de play
 						tagvideo.currentTime += 10
+					}
+
+
+					/*////////////////////// BOTÓN DE AMPLIAR PANTALLA //////////////////////*/
+
+					let botonampliar = document.createElement("button")	// Creo un boton
+					botonampliar.innerHTML = "<img src='fullscreen.svg'>"								// Le pongo el icono
+					barracontroles.appendChild(botonampliar)					// Lo añado al contenedor
+
+					botonampliar.onclick = function(){							// Cuando haga click en el boton de play
+						tagvideo.requestFullscreen()
 					}
 					
 					/*////////////////////// CLICK EN EL VIDEO //////////////////////*/
