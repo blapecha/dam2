@@ -1,70 +1,160 @@
 <!doctype html>
 <html>
-	<head>
-		<style>
-			*{transition:all 1s;}
-			.jvampliador{
-				position:fixed;
-				top:10px;
-				right:10px;
+
+<head>
+	<style>
+		* {
+			transition: all 1s;
+		}
+
+		.jvampliador {
+			position: fixed;
+			top: 10px;
+			right: 10px;
+		}
+
+		.jvampliador button {
+			border: none;
+			margin: 0px;
+			padding: 5px;
+			background: black;
+			color: white;
+			width: 30px;
+			height: 30px;
+			font-weight: bold;
+			font-size: 26px;
+			line-height: 16px;
+			border: 1px solid white;
+		}
+
+		.jvampliador button:first-child {
+			border-radius: 30px 0px 0px 30px;
+		}
+
+		.jvampliador button:last-child {
+			border-radius: 0px 30px 30px 0px;
+		}
+
+		.colores button {
+			border: none;
+			margin: 0px;
+			padding: 5px;
+			background: rgb(77, 72, 72);
+			color: white;
+			width: 100px;
+			height: 30px;
+			font-weight: bold;
+			font-size: 16px;
+			line-height: 16px;
+			border: 1px solid white;
+		}
+
+		.colores button:first-child {
+			border-radius: 30px 0px 0px 30px;
+		}
+
+		.colores button:last-child {
+			border-radius: 0px 30px 30px 0px;
+		}
+
+		.inicializar {
+			position: fixed;
+			top: 80px;
+			right: 10px;
+			display: flex;
+			gap: 5px;
+		}
+	</style>
+	<script>
+		window.onload = function () {
+			let tamanio = 1;
+			let contenedor = document.createElement("div")
+			contenedor.classList.add("jvampliador")
+			let contenedorReset = document.createElement("div")
+			let aumentar = document.createElement("button")
+			aumentar.textContent = "+"
+			contenedor.appendChild(aumentar)
+			aumentar.onclick = function () {
+				tamanio *= 1.1;
+				document.querySelector("body").style.fontSize = tamanio + "em"
 			}
-			.jvampliador button{
-				border:none;
-				margin:0px;
-				padding:5px;
-				background:black;
-				color:white;
-				width:30px;
-				height:30px;
-				font-weight:bold;
-				font-size:26px;
-				line-height:16px;
-				border:1px solid white;
+
+			let disminuir = document.createElement("button")
+			disminuir.textContent = "-"
+			contenedor.appendChild(disminuir)
+
+			disminuir.onclick = function () {
+				tamanio *= 0.9;
+				document.querySelector("body").style.fontSize = tamanio + "em"
 			}
-			.jvampliador button:first-child{
-				border-radius:30px 0px 0px 30px;
-			}
-			.jvampliador button:last-child{
-				border-radius:0px 30px 30px 0px;
-			}
-			
-		</style>
-		<script>
-			window.onload = function(){
-				let tamanio = 1;
-				let contenedor = document.createElement("div")
-				contenedor.classList.add("jvampliador")
-				let aumentar = document.createElement("button")
-				aumentar.textContent = "+"
-				contenedor.appendChild(aumentar)
-				aumentar.onclick = function(){
-					tamanio *= 1.1;
-					document.querySelector("body").style.fontSize = tamanio+"em"
-				}
-				
-				let disminuir = document.createElement("button")
-				disminuir.textContent = "-"
-				contenedor.appendChild(disminuir)
-				
-				disminuir.onclick = function(){
-					tamanio *= 0.9;
-					document.querySelector("body").style.fontSize = tamanio+"em"
-				}
-				document.querySelector("body").appendChild(contenedor)
-			}
-			
-		</script>
-	</head>
-	
-	<body>
-		<h1>La web de Jose Vicente</h1>
-		<nav>
-			<ul>
-				<li>Inicio</li>
-				<li>Sobre mi</li>
-				<li>Proyectos</li>
-				<li>Contacto</li>
-			</ul>
-		</nav>
-	</body>
+			document.querySelector("body").appendChild(contenedor)
+
+			/////////////////    añadir colores /////////////
+
+			contenedor = document.createElement("div");
+			contenedor.classList.add("colores")
+			// Crear botón para cambiar a amarillo
+			let amarillo = document.createElement("button");
+			amarillo.textContent = "Amarillo";
+			amarillo.onclick = function () {
+				document.body.style.backgroundColor = "yellow";
+			};
+			contenedor.appendChild(amarillo);
+
+			// Crear botón para cambiar a gris claro
+			let grisClaro = document.createElement("button");
+			grisClaro.textContent = "Gris Claro";
+			grisClaro.onclick = function () {
+				document.body.style.backgroundColor = "lightgray";
+			};
+			contenedor.appendChild(grisClaro);
+
+			// Crear botón para cambiar a azul clarito///
+			let azulClaro = document.createElement("button");
+			azulClaro.textContent = "Azul Claro";
+			azulClaro.onclick = function () {
+				document.body.style.backgroundColor = "lightblue";
+			};
+			contenedor.appendChild(azulClaro);
+
+			// Estilizar y añadir contenedor al cuerpo del documento
+			document.body.appendChild(contenedor);
+			contenedor.style.position = "fixed";
+			contenedor.style.top = "40px";
+			contenedor.style.right = "10px";
+			contenedor.style.display = "flex";
+			contenedor.style.gap = "5px";
+
+			// Crear un botón para que todo vuelva a ser como al principio
+			let reset = document.createElement("button");
+			reset.textContent = "Reset";
+			reset.onclick = function () {
+				document.body.style.backgroundColor = "white";
+				document.querySelector("body").style.fontSize = "1em";
+			};
+			contenedorReset.appendChild(reset);
+			contenedorReset.classList.add("inicializar")
+
+
+
+
+			document.body.appendChild(contenedorReset);
+
+		};
+
+	</script>
+</head>
+
+<body>
+	<h1>La web de prueba</h1>
+	<nav>
+		<ul>
+			<li>Inicio</li>
+			<li>Sobre mi</li>
+			<li>Proyectos</li>
+			<li>Contacto</li>
+		</ul>
+	</nav>
+</body>
+
 </html>

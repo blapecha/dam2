@@ -1,36 +1,69 @@
 <!doctype html>
 <html>
-	<head>
-		<style>
-			*{transition:all 1s;}
-		</style>
-		<script>
-			window.onload = function(){
-				let contenedor = document.createElement("div")
-				let aumentar = document.createElement("button")
-				aumentar.textContent = "+"
-				contenedor.appendChild(aumentar)
-				let disminuir = document.createElement("button")
-				disminuir.textContent = "-"
-				contenedor.appendChild(disminuir)
-				document.querySelector("body").appendChild(contenedor)
-				contenedor.style.position = "fixed"
-				contenedor.style.top = "10px"
-				contenedor.style.right = "10px"
-			}
-			
-		</script>
-	</head>
-	
-	<body>
-		<h1>La web de Jose Vicente</h1>
-		<nav>
-			<ul>
-				<li>Inicio</li>
-				<li>Sobre mi</li>
-				<li>Proyectos</li>
-				<li>Contacto</li>
-			</ul>
-		</nav>
-	</body>
+
+<head>
+	<style>
+		* {
+			transition: all 1s;
+		}
+	</style>
+	<script>
+
+		window.onload = function () {
+			let contenedor = document.createElement("div")
+			let aumentar = document.createElement("button")
+			aumentar.textContent = "+"
+			contenedor.appendChild(aumentar)
+			let disminuir = document.createElement("button")
+			disminuir.textContent = "-"
+			contenedor.appendChild(disminuir)
+			document.querySelector("body").appendChild(contenedor)
+			contenedor.style.position = "fixed"
+			contenedor.style.top = "40px"
+			contenedor.style.right = "10px"
+			// Crear contenedor para los botones
+			contenedor = document.createElement("div");
+
+			// Crear botón para cambiar a amarillo
+			let amarillo = document.createElement("button");
+			amarillo.textContent = "Amarillo";
+			amarillo.onclick = function () {
+				document.body.style.backgroundColor = "yellow";
+			};
+			contenedor.appendChild(amarillo);
+
+			// Crear botón para cambiar a gris claro
+			let grisClaro = document.createElement("button");
+			grisClaro.textContent = "Gris Claro";
+			grisClaro.onclick = function () {
+				document.body.style.backgroundColor = "lightgray";
+			};
+			contenedor.appendChild(grisClaro);
+
+			// Estilizar y añadir contenedor al cuerpo del documento
+			document.body.appendChild(contenedor);
+			contenedor.style.position = "fixed";
+			contenedor.style.top = "10px";
+			contenedor.style.right = "10px";
+			contenedor.style.display = "flex";
+			contenedor.style.gap = "5px";
+		};
+	</script>
+
+	</script>
+
+</head>
+
+<body>
+	<h1>La web de Jose Vicente</h1>
+	<nav>
+		<ul>
+			<li>Inicio</li>
+			<li>Sobre mi</li>
+			<li>Proyectos</li>
+			<li>Contacto</li>
+		</ul>
+	</nav>
+</body>
+
 </html>
