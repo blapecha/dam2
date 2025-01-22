@@ -1,0 +1,101 @@
+01 - Inicio de sesion
+Creamos un documento html con 2 inputs, usuario y contraseña
+02 - Estilo básico
+Añadimo estilos y una imagen
+03 - Javascript
+Creamos un javascript para recuperar los valores del formulario y los preaparamos en json
+04 - Base de datos con usuario
+Creamos el usuario y tablas de usuarios e insertamos datos
+05 - conexión a bbdd 
+Preparo el javascript para llamar al servidor y ejecutar la lógica de login.
+Le hado un post pasando los datos del usuario a la url servidor/loginusuario.php
+06 - compruebo el usuario
+en el servidor, valido que el usuario exista en la bbdd con su contraseña
+si existe, devuelvo un json con los datos del usuario y si no , devuelvo un json con un ko
+07 - el cliente maneja la situacion
+Si el usuario existe, lo guardo en el localStorage del navegador
+Si no existe, muestro un mensaje en pantalla y recargo la pagina a los 5 segundos
+08 - escritorio
+Si el usuario existe, muetro un mensaje en verde, indicando al usuario que lo voy a redirigir al escritorio
+Si el usuario no existe, muestro el mensaje en rojo indicando que va a recargar la pagina en 5 segundos
+Creo la pagina escritorio.html
+09 - formato de escritorio
+Creo un carpeta escritorio donde coloco sus documentos relaiconaods
+10 - crar tabla de aplicaciones
+Creo la tabla de apliaciones e inserto datos
+11 - obtener aplicaciones
+Creo un documento php para recuperar la información de las aplicaciones activas y devolverlas como json
+Desde javascript, al entrar en la página de escritorio llama a ese documento php para obtener el json de las aplicaicones.
+12 - recoger json
+el javascirpt de escritorio comienza a rellenar la infomacion de las aplicaciones en su html
+13
+14 - pantalla de administracion super controlador
+creo la carpeta de supercontrolador donde estará toda los docuemntos
+15
+16 - tabla estatica
+comiento a crear la estructura del las llamadas del super controlador
+17 - crear tabla de clientes
+Crea la tabla de clientes en la base de datos
+18 - tabla dinamica
+Creo un docuemtno php que me permite recuperar el nombre de las tablas que hay en la base de datos
+por javascript, creo una lista con el nombre de las tablas que he recuperado
+19 - contenido dinamico de la tabla
+Creo un docuemtno php para recueprar las columnas de las tablas
+Creo un documento php para recuperar los datos de las tablas
+Al javascirpt del supercontrolador, le añado la logica para poder llamar a esos documentos y añadirolos en la página.
+20 - tabla dinamica
+Al script del supercontrolador, le añado la lógica para que cuando selecciones una tabla, carge sus datos
+21 - eliminar estetico
+Guardamos informacion sobre el campo principal de la tabla
+22 - eliminar efectivamente
+creo un documento php para borrar datos de la tabla seleccionada por el id.
+añado al javascirpt del supercontrolador la lógica para borrar un elemento de la tabla
+23 - utilidades
+Creo unas utilidades en python para leer archivos de excel, csv, bbdd
+24 - insertar 
+Creo una seccion para abrir un modal 
+25 - boton de insertar
+Creo un boton en el html del super controlador para insertar, en el javascript capturo el click par amostrar el modal.
+26 - insertamos campos en la ventana
+Relleno el modal con tantos campos como columnas tiene la tabla en la que voy a insertar
+27 - eliminar estetico
+creamos los inputs del modal y el boton de envio
+28 - estilo del formulario
+Aplicacmos estilos al formulario
+29 - Mejoramos la usabilidad
+Mejoramos el aspecto del formulario y lo introducimos dentro de un section.
+30 - recogemos los datos del formulario
+En el javascript del supercontrolador, recuperamos los datos de todos los inputs del formulario
+31 - ponemos el nombre de la tabla
+Ponemos en el formulario el nombre de la tabla en la que vamos a insertar
+32 - preparamos un paquete de datos
+Creamos una estructura para mandar datos al servidor
+33 - lanzamos el paquete al servidor
+cremaos el docuemnto insertar.php que recibe los datos del formulario
+34 - formateo peticion sql
+creamos una sql para insertar
+35 - insertamos en la base de datos
+actualizamos el fichero insertar para que prepare la query de insertar
+36 - efecto de aparicion
+añadimos el código javascirpt para que el modal aparezca
+37 - desaparece al insertar
+añadimos el código javascirpt para que el modal desaparezca
+38 - integramos acceso a datos
+Unificamos en un fichero las llamadas a la base de datos
+39 - integramos las llamadas
+40 - arreglamos los datos
+modificamos la llamada en el script
+41 - arrelamos el eliminar
+modificamos la llamada en el script para eliminar
+42 - Arreglemos 
+arreglamos la seleccion de la tabla
+43 , 44, 45 - arreglamos login
+actualizamos el post de login
+46, 47 - arreglo el escritorio
+actualizar las urls para insertar en tablas
+48 - Diagrama de flujo
+incluye documentacion
+49 - titulo de la tabla
+incluimos el titulo de la tabla en el index del super controlador
+50 - titulo y comentario de tabla
+Modifico la consulta para obtener las tablas para que busque en un esquema concreto y devuelva en json con tables_in, table_comment
