@@ -1,0 +1,7 @@
+RewriteEngine On
+
+# Rewrite endpoint for "clientes"
+RewriteRule ^clientes$ http://localhost/4Generaci%C3%B3nServiciosRed/001-Protocolos%20est%C3%A1ndar%20de%20comunicaci%C3%B3n%20en%20red%20a%20nivel%20de%20aplicaci%C3%B3n/006-sacar%20pedidos/api.php?o=clientes [QSA,L]
+
+# Rewrite endpoint for "cliente"
+RewriteRule ^cliente/([0-9]+)$ http://localhost/4Generaci%C3%B3nServiciosRed/001-Protocolos%20est%C3%A1ndar%20de%20comunicaci%C3%B3n%20en%20red%20a%20nivel%20de%20aplicaci%C3%B3n/006-sacar%20pedidos/api.php?o=cliente&id=$1 [QSA,L]
