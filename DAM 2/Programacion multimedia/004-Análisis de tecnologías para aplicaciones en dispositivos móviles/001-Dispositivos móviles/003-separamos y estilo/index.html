@@ -1,21 +1,101 @@
 <!doctype html>
-<html>
-	<head>
-		<title>Listado de coches</title>
-		<script src="codigo.js"></script>
-		<link rel="Stylesheet" href="estilo.css">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de coches</title>
+    <script src="codigo.js" defer></script>
+    <link rel="stylesheet" href="estilo.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+</head>
+<body>
+    <h1>Crimson Cars</h1>
 
-	</head>
-	<body>
-		<h1>Crimson Cars</h1>
-		<template id="plantillacoche">
-			<div class="coche">
-				<img src="https://fotos.quecochemecompro.com/opel-corsa/opel-corsa-dinamismo-carretera.jpg?size=750x400">
-				<h3>Titulo</h3>
-				<p class="descripcion">Descripcion</p>
-				<p class="precio">0.00€</p>
-			</div>
-		</template>
-	</body>
+    <label>
+        <input type="checkbox" id="danaCheck">
+        Soy afectado por la DANA (20% de descuento)
+    </label>
+
+    <div id="contenedorCoches"></div>
+
+    <h2>Contacto y Reserva</h2>
+    <form id="reservaForm">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" required>
+
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" required>
+
+        <label for="cocheSeleccionado">Coche seleccionado:</label>
+        <input type="text" id="cocheSeleccionado" readonly>
+
+        <label for="mensaje">Mensaje o consulta:</label>
+        <textarea id="mensaje" rows="4"></textarea>
+
+        <button type="submit">Enviar solicitud</button>
+    </form>
+
+    <template id="plantillacoche">
+        <div class="coche">
+            <img src="" alt="Imagen del coche">
+            <h3 class="titulo">Título</h3>
+            <p class="descripcion">Descripción</p>
+            <p class="precio">0.00€</p>
+            <button class="reservar">Reservar</button>
+        </div>
+    </template>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const contenedor = document.getElementById("contenedorCoches");
+            const plantilla = document.getElementById("plantillacoche").content;
+            const danaCheck = document.getElementById("danaCheck");
+            const reservaForm = document.getElementById("reservaForm");
+            const cocheSeleccionadoInput = document.getElementById("cocheSeleccionado");
+
+            const coches = [
+                { titulo: "Opel Corsa", descripcion: "Compacto y eficiente", precio: 14990, imagen: "https://fotos.quecochemecompro.com/opel-corsa/opel-corsa-dinamismo-carretera.jpg?size=750x400" },
+                { titulo: "Ford Fiesta", descripcion: "Ágil y dinámico", precio: 16500, imagen: "https://fotos.quecochemecompro.com/ford-fiesta/ford-fiesta-azul-dinamico-movimiento.jpg?size=1200x800" }
+            ];
+
+            function mostrarCoches(descuento = false) {
+                contenedor.innerHTML = ""; 
+
+                coches.forEach(coche => {
+                    let clon = document.importNode(plantilla, true);
+                    clon.querySelector("img").src = coche.imagen;
+                    clon.querySelector("h3").textContent = coche.titulo;
+                    clon.querySelector(".descripcion").textContent = coche.descripcion;
+
+                    let precioFinal = descuento ? coche.precio * 0.8 : coche.precio;
+                    clon.querySelector(".precio").textContent = precioFinal.toLocaleString("es-ES", { style: "currency", currency: "EUR" });
+
+                    clon.querySelector(".reservar").addEventListener("click", function() {
+                        cocheSeleccionadoInput.value = coche.titulo;
+                    });
+
+                    contenedor.appendChild(clon);
+                });
+            }
+
+            mostrarCoches(); 
+
+            danaCheck.addEventListener("change", function() {
+                mostrarCoches(danaCheck.checked);
+            });
+
+            reservaForm.addEventListener("submit", function(event) {
+                event.preventDefault();
+
+                if (!cocheSeleccionadoInput.value) {
+                    alert("Por favor, selecciona un coche antes de enviar.");
+                    return;
+                }
+
+                alert("Solicitud enviada con éxito. Nos pondremos en contacto contigo.");
+                reservaForm.reset();
+            });
+        });
+    </script>
+</body>
 </html>
+
