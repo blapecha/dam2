@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sankey Chart with Dynamic Nodes & Links</title>
+  <link rel="stylesheet" href="jocarsa _ floralwhite.css">
+</head>
+<body>
+  <h2>Agregar Nodo</h2>
+  <form id="node-form">
+    <input type="text" id="node-name" placeholder="Nombre del nodo" required>
+    <input type="color" id="node-color" value="#1f77b4">
+    <button type="submit">Añadir Nodo</button>
+  </form>
+
+  <h2>Agregar Relación</h2>
+  <form id="link-form">
+    <select id="source-node"></select>
+    <select id="target-node"></select>
+    <input type="number" id="link-value" placeholder="Valor" required>
+    <button type="submit">Añadir Relación</button>
+  </form>
+
+  <div id="chart-container"></div>
+
+  <script src="jocarsa _ floralwhite.js"></script>
+  <script>
+    let data = { nodes: [], links: [] };
+    function updateChart() {
+      document.getElementById('chart-container').innerHTML = '';
+      jocarsaFloralwhite.createSankeyChart({
+        element: '#chart-container',
+        data: data,
+        width: 600,
+        height: 800,
+        nodeWidth: 120,
+        nodePadding: 10
+      });
+      updateDropdowns();
+    }
+    function updateDropdowns() {
+      
+      const sourceSelect = document.getElementById("source-node");
+      const targetSelect = document.getElementById("target-node");
+      sourceSelect.innerHTML = targetSelect.innerHTML = "";
+      data.nodes.forEach((node, index) => {
+        const option = new Option(node.name, index);
+        sourceSelect.add(option.cloneNode(true));
+        targetSelect.add(option);
+      });
+    }
+    document.getElementById("node-form").addEventListener("submit", function(event) {
+      
+      event.preventDefault();
+      const nodeName = document.getElementById("node-name").value;
+      const nodeColor = document.getElementById("node-color").value;
+      data.nodes.push({ name: nodeName, color: nodeColor });
+      updateChart();
+      updateDropdowns();
+    });
+    document.getElementById("link-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const source = parseInt(document.getElementById("source-node").value);
+      const target = parseInt(document.getElementById("target-node").value);
+      const value = parseInt(document.getElementById("link-value").value);
+      if (source !== target) {
+        data.links.push({ source, target, value });
+        updateChart();
+      } else {
+        alert("No se pueden conectar un nodo consigo mismo.");
+      }
+    });
+  </script>
+</body>
+</html>
