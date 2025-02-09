@@ -7,12 +7,12 @@ from datetime import datetime, timedelta
 
 # Path for hourly data file
 data_paths = {
-    "hourly": "/var/www/html/jocarsa-tomato/carga_hourly.txt",
+    "hourly": "~/borrar/carga_hourly.txt",
 }
 
 # Path for plot folder
 plot_folders = {
-    "hourly": "/var/www/html/jocarsa-tomato/img/hourly",
+    "hourly": "~/borrar/hourly",
 }
 
 # Create the plot folder if it doesn't exist
@@ -54,6 +54,8 @@ def measure_metrics():
     num_conexiones = len(psutil.net_connections())
     temperaturas = list(obtener_temperaturas())
     temperatura_promedio = sum(temperaturas) / len(temperaturas) if temperaturas else 0
+    lecturas_disco = psutil.disk_io_counters().read_bytes / (1024 * 1024)
+    escrituras_disco = psutil.disk_io_counters().write_bytes / (1024 * 1024)
     return (
         datetime.now(),
         carga_cpu,
@@ -63,6 +65,8 @@ def measure_metrics():
         subida_mbps,
         temperatura_promedio,
         num_conexiones,
+        lecturas_disco,
+        escrituras_disco
     )
 
 # Function to obtain CPU temperatures (requires lm-sensors)
@@ -123,6 +127,8 @@ plot_configs = [
     (5, 'Subida', 'Mbps', None),
     (6, 'Temperatura', 'Temperatura (°C)', None),
     (7, 'Conexiones Activas', 'Conexiones', None),
+    (8, 'Lecturas de Disco', 'MB', None),
+    (9, 'Escrituras de Disco', 'MB', None),
 ]
 
 # Generate plots for hourly data

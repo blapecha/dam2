@@ -47,7 +47,10 @@ def listar_estructura_markdown(ruta, archivo_salida):
             for file in files:
                 if not file.startswith('.'):  # Opcional: también puedes excluir archivos ocultos
                     file_indent = '    ' * (level + 1)
-                    f.write(f"{file_indent}- 🗋  {file}\n")
+                    if file.endswith('.jpg') or file.endswith('.png') or file.endswith('.jpeg') or file.endswith('.gif'):
+                        f.write(f"{file_indent}- 📷  {file}\n")
+                    else:
+                        f.write(f"{file_indent}- 🗋  {file}\n")
 
 
 def extraer_docstring(file_path):

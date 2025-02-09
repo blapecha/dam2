@@ -1,0 +1,38 @@
+[
+	{
+		"nombre":"Marca",
+		"tipo":"text",
+		"min":5,
+		"max":30,
+		"valorejemplo":"p.ej.: Nombre de la marca",
+		"titulo":"Nombre",
+		"descripcion": "Introduce el nombre de la marca",
+		"tabla":"coches",
+		"campo":"marca",
+		"jvvalidador":""
+	},
+	{
+		"nombre":"Modelo",
+		"tipo":"text",
+		"min":5,
+		"max":30,
+		"valorejemplo":"p.ej: pon el modelo",
+		"titulo":"Descripción",
+		"descripcion": "Pon el modelo del coche",
+		"tabla":"coches",
+		"campo":"modelo",
+		"jvvalidador":""
+	},
+    {
+		"nombre":"precio",
+		"tipo":"number",
+		"min":0,
+		"max":9999999,
+		"valorejemplo":"p.ej: pon el precio",
+		"titulo":"Precio",
+		"descripcion": "Pon el precio del coche",
+		"tabla":"coches",
+		"campo":"precio",
+		"jvvalidador":""
+	}
+]
