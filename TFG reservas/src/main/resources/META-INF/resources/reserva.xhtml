@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="templates/plantilla.xhtml">
+
+    <ui:define name="titulo">
+        Página de Reserva
+    </ui:define>
+
+    <ui:define name="contenido">
+        <h:form>
+            <h3>Ejemplo de formulario de reservas!</h3>
+            <div class="flex flex-row">
+            <span class="ui-float-label m-5">
+               <p:inputText id="float-input-fechaInicio" value="#{reservaView.fechaInicio}"/>
+               <p:outputLabel for="@previous" value="Fecha de Inicio"/>
+           </span>
+                <span class="ui-float-label m-5">
+               <p:inputText id="float-input-fechaFinal" value="#{reservaView.fechaFinal}"/>
+               <p:outputLabel for="@previous" value="Fecha Final"/>
+           </span>
+                <span class="ui-float-label m-5">
+               <p:inputText id="float-input-precioManyana" value="#{reservaView.precioManyana}"/>
+               <p:outputLabel for="@previous" value="Precio de Mañana"/>
+           </span>
+                <span class="ui-float-label m-5">
+               <p:inputText id="float-input-precioTarde" value="#{reservaView.precioTarde}"/>
+               <p:outputLabel for="@previous" value="Precio de Tarde"/>
+           </span>
+                <span class="ui-float-label m-5">
+               <p:inputText id="float-input-municipio" value="#{reservaView.municipio}"/>
+               <p:outputLabel for="@previous" value="Municipio"/>
+           </span>
+                <span class="ui-float-label m-5">
+               <p:inputText id="float-input-local" value="#{reservaView.local}"/>
+               <p:outputLabel for="@previous" value="Local"/>
+           </span>
+                <span class="ui-float-label m-5">
+               <p:inputText id="float-input-direccion" value="#{reservaView.direccion}"/>
+               <p:outputLabel for="@previous" value="Direccion"/>
+           </span>
+            </div>
+            <div class="m-5">
+                <p:commandButton type="submit" value="Enviar" action="#{reservaView.enviarFormulario}"></p:commandButton>
+            </div>
+        </h:form>
+
+
+    </ui:define>
+</ui:composition>

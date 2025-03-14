@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: reservas
+    datasource:
+      url: jdbc:h2:mem:reservasdb
+      driver-class-name: org.h2.Driver
+      username: sa
+      password:
+    sql:
+      init:
+        platform: h2
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+
+joinfaces:
+  primefaces:
+    theme: saga
+  faces:
+    project-stage: Production
+    facelets-libraries: /tags/tags.taglib.xml
+
+#  datasource:
+#    url: jdbc:h2:mem:reservasdb
+#    driver-class-name: org.h2.Driver
+#    username: sa
+#    password:
+#  sql:
+#    init:
+#      platform: h2
+
+
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/reservas?allowPublicKeyRetrieval=true
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: root
+#    password: blapecha

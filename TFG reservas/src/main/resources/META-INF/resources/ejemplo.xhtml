@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="templates/plantilla.xhtml">
+
+    <ui:define name="titulo">
+        Página de ejemplo
+    </ui:define>
+
+    <ui:define name="contenido">
+        <h:form>
+            <h3>Ejemplo de formulario!</h3>
+            <div class="flex flex-row">
+            <span class="ui-float-label m-5">
+               <p:inputText id="float-input-nombre" value="#{ejemploView.nombre}"/>
+               <p:outputLabel for="@previous" value="Nombre"/>
+           </span>
+            <span class="ui-float-label m-5">
+               <p:inputText id="float-input-municipio" value="#{ejemploView.municipio}"/>
+               <p:outputLabel for="@previous" value="Municipio"/>
+           </span>
+            <span class="ui-float-label m-5">
+               <p:inputText id="float-input-direccion" value="#{ejemploView.direccion}"/>
+               <p:outputLabel for="@previous" value="Direccion"/>
+           </span>
+            </div>
+            <div class="m-5">
+                <p:commandButton type="submit" value="Enviar" action="#{ejemploView.enviarFormulario}"></p:commandButton>
+            </div>
+        </h:form>
+
+        <h3>Ejemplo de tabla</h3>
+        <p:dataTable var="local" value="#{ejemploView.locales}">
+            <p:column headerText="Id">
+                <h:outputText value="#{local.id}" />
+            </p:column>
+
+            <p:column headerText="Nombre">
+                <h:outputText value="#{local.nombre}" />
+            </p:column>
+
+            <p:column headerText="Municipio">
+                <h:outputText value="#{local.municipio}" />
+            </p:column>
+
+            <p:column headerText="Direccion">
+                <h:outputText value="#{local.direccion}" />
+            </p:column>
+        </p:dataTable>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+    <title><ui:insert name="titulo">Título predeterminado</ui:insert></title>
+    <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+    <link href="#{resource['images/favicon.ico']}" rel="shortcut icon"/>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+</h:head>
+
+<h:body>
+    <div class="flex flex-row m-2">
+        <!-- Menú -->
+        <div style="max-width: 100px" class="m-2">
+            <nav>
+                <ul>
+                    <li class="m-2"><h:link outcome="index" value="Inicio"/></li>
+                    <li class="m-2"><h:link outcome="locales" value="Locales"/></li>
+                    <li class="m-2"><h:link outcome="ejemplo" value="Ejemplo"/></li>
+                    <li class="m-2"><h:link outcome="reserva" value="Reserva"/></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Contenido Dinámico -->
+        <div>
+            <main>
+                <ui:insert name="contenido">Contenido predeterminado.</ui:insert>
+            </main>
+        </div>
+    </div>
+    <!-- Pie de Página -->
+    <footer>
+        <p>© 2023, Mi Aplicación</p>
+    </footer>
+</h:body>
+</html>
