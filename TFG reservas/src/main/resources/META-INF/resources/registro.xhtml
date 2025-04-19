@@ -8,48 +8,68 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>Aqui va el tittle</title>
+    <title>Alta de usuario</title>
     <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
     <link href="#{resource['images/favicon.ico']}" rel="shortcut icon"/>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </h:head>
 
 <h:body>
-    <h:form>
-        <h3>Ejemplo de Registro!</h3>
-        <div class="flex flex-row">
+    <div class="flex flex-row">
+        <div class="">
+            <h:form>
+                <h3 class="m-5 text-2xl">Alta de usuario</h3>
+                <div class="flex flex-col">
             <span class="ui-float-label m-5">
                <p:inputText id="float-input-nombre" value="#{registroView.nombre}"/>
                <p:outputLabel for="@previous" value="Nombre"/>
            </span>
-            <span class="ui-float-label m-5">
+                    <span class="ui-float-label m-5">
                <p:inputText id="float-input-apellidos" value="#{registroView.apellidos}"/>
                <p:outputLabel for="@previous" value="Apellidos"/>
            </span>
-            <span class="ui-float-label m-5">
+                    <span class="ui-float-label m-5">
                <p:inputText id="float-input-telefono" value="#{registroView.telefono}"/>
                <p:outputLabel for="@previous" value="Telefono"/>
            </span>
-            <span class="ui-float-label m-5">
+                    <span class="ui-float-label m-5">
                <p:inputText id="float-input-email" value="#{registroView.email}"/>
                <p:outputLabel for="@previous" value="Email"/>
            </span>
-            <span class="ui-float-label m-5">
+                    <span class="ui-float-label m-5">
                <p:inputText id="float-input-user" value="#{registroView.user}"/>
                <p:outputLabel for="@previous" value="User"/>
            </span>
-            <span class="ui-float-label m-5">
+                    <span class="ui-float-label m-5">
                <p:inputText id="float-input-password" value="#{registroView.password}"/>
                <p:outputLabel for="@previous" value="Password"/>
            </span>
+                    <div class="m-5">
+                        <span>Rol</span>
+                        <p:selectOneRadio id="line" value="#{registroView.rol}" layout="lineDirection">
+                            <f:selectItem itemLabel="Cliente" itemValue="cliente"/>
+                            <f:selectItem itemLabel="Propietario" itemValue="propietario"/>
+                        </p:selectOneRadio>
 
-            <p:selectBooleanCheckbox value="#{registroView.duenyo}" itemLabel="Duenyo"/>
-
+                    </div>
+                </div>
+                <div class="m-5">
+                    <p:commandButton type="submit" value="Enviar" action="#{registroView.darDeAlta}"></p:commandButton>
+                </div>
+            </h:form>
         </div>
         <div class="m-5">
-            <p:commandButton type="submit" value="Enviar" action="#{registroView.darDeAlta}"></p:commandButton>
+            <div class="legal-text" style="font-size: 0.9em; color: #555;">
+                <p class="text-lg text-justify">
+                    De conformidad con lo establecido en la normativa vigente en Protección de Datos de Carácter Personal, le informamos que los datos que proporcione a través de este formulario serán tratados por <strong>[ReservaLocales S.L.]</strong> como responsable del tratamiento, con la finalidad de gestionar su registro como cliente y prestar los servicios solicitados.
+                    Sus datos serán tratados de manera confidencial y no serán cedidos a terceros, salvo obligación legal o cuando sea necesario para la prestación del servicio. Puede ejercer sus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad dirigiéndose a <a href="mailto:correo@tuempresa.com">correo@reservalocales.com</a>, acompañando copia de su documento de identidad.
+                    Para más información sobre cómo tratamos sus datos personales, puede consultar nuestra <a href="https://policies.google.com/privacy" target="_blank" class="bg-sky-500">Política de Privacidad</a>.
+                    Al enviar este formulario, usted declara haber leído y aceptado nuestra <a href="https://policies.google.com/privacy" target="_blank" class="bg-sky-500">Política de Privacidad</a>.
+                </p>
+            </div>
+
         </div>
-    </h:form>
+    </div>
 </h:body>
 
 </html>

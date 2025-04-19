@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="templates/plantilla.xhtml">
+
+    <ui:define name="titulo">
+        Página de Reserva
+    </ui:define>
+
+    <ui:define name="contenido">
+        <div>
+            <h:form>
+                <span class="text-lg m-2">Reservar local: <h:outputText value="#{reservarView.local.nombre}"/></span>
+                <div class="flex flex-col">
+                    <span class="ui-float-label m-2">
+                        <p:datePicker id="basic" value="#{reservarView.fecha}" />
+                       <p:outputLabel for="@previous" value="Fecha de Inicio"/>
+                   </span>
+                    <p:commandButton type="submit"
+                                     action="#{reservarView.crearReserva}"
+                                     value="Reservar"
+                                     styleClass="m-2"></p:commandButton>
+                </div>
+            </h:form>
+        </div>
+
+    </ui:define>
+</ui:composition>

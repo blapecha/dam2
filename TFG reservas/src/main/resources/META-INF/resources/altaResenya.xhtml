@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="templates/plantilla.xhtml">
+
+    <ui:define name="titulo">
+        Página de resenya
+    </ui:define>
+
+    <ui:define name="contenido">
+        <div>
+            <h:form>
+                <span class="text-lg m-2">Reseñar local: <h:outputText value="#{altaResenyaView.local.nombre}"/></span>
+                <div class="flex flex-col">
+                    <div class="m-2">
+                    <span class="ui-float-label">
+                        <p:inputText id="float-input" value="#{altaResenyaView.titulo}"/>
+                        <p:outputLabel for="@previous" value="Titulo"/>
+                    </span>
+                    </div>
+                    <div class="m-2 flex flex-col">
+                        <span>Descripcion</span>
+                        <p:inputTextarea rows="6" cols="15" value="#{altaResenyaView.mensaje}"/>
+                    </div>
+
+                    <div class="m-2">
+                        <h5 class="mt-0">Puntuación</h5>
+                        <p:rating id="rating1" value="#{altaResenyaView.puntuacion}"/>
+                    </div>
+                    <div class="m-2">
+                    <p:commandButton type="submit"
+                                     action="#{altaResenyaView.crearResenya}"
+                                     value="Publicar reseña"
+                                     styleClass="m-2"></p:commandButton>
+                    </div>
+                </div>
+            </h:form>
+        </div>
+
+    </ui:define>
+</ui:composition>

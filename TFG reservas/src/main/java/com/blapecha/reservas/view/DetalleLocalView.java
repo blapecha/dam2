@@ -3,6 +3,7 @@ package com.blapecha.reservas.view;
 import com.blapecha.reservas.entity.Local;
 import com.blapecha.reservas.entity.Resenya;
 import com.blapecha.reservas.service.LocalService;
+import com.blapecha.reservas.service.ResenyaService;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.context.FacesContext;
@@ -24,6 +25,9 @@ public class DetalleLocalView {
     @Autowired
     private LocalService localService;
 
+    @Autowired
+    private ResenyaService resenyaService;
+
     private Local local;
 
     private List<Resenya> resenyas;
@@ -37,20 +41,7 @@ public class DetalleLocalView {
                 .get("id"));
 
         local = localService.buscarPorId(idLocal);
-
-        resenyas = new ArrayList<>();
-        Resenya resenya = new Resenya();
-        resenya.setFecha(LocalDate.now());
-        resenya.setTitulo("El sitio más guarro que he visto");
-        resenya.setMensaje("Todo sucio, goteras, mierda por todas partes, no volveremos que asco");
-        resenya.setPuntuacion(1);
-        resenyas.add(resenya);
-        resenya = new Resenya();
-        resenya.setFecha(LocalDate.now());
-        resenya.setTitulo("El sitio esta genial");
-        resenya.setMensaje("Nos lo hemos pasado muy bien");
-        resenya.setPuntuacion(3);
-        resenyas.add(resenya);
+        this.resenyas = resenyaService.getResenyas(local);
 
     }
 }

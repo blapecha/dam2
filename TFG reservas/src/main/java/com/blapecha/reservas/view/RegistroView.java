@@ -30,11 +30,11 @@ public class RegistroView {
     public String email;
     public String user;
     public String password;
-    public boolean duenyo;
+    public String rol;
 
     public void darDeAlta() {
 
-        if(duenyo){
+        if(rol.equals("propietario")){
             Duenyo d = new Duenyo();
             d.setNombre(nombre);
             d.setApellidos(apellidos);
@@ -63,7 +63,7 @@ public class RegistroView {
         email = "";
         user = "";
         password = "";
-        duenyo = false;
+        rol = "";
     }
 
     @PostConstruct

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title><ui:insert name="titulo">Detalle de local</ui:insert></title>
+    <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+    <link href="#{resource['images/favicon.ico']}" rel="shortcut icon"/>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+</h:head>
+<h:body>
+    <div>
+
+
+        <span class="text-2xl m-2">Detalles del local!</span>
+        <div class="flex flex-col flex-grow">
+            <div class="m-2">
+                <p:card style="width: 25rem; margin-bottom: 2em">
+                    <f:facet name="title">
+                        #{detalleLocalView.local.nombre}
+                    </f:facet>
+
+                    <p>Direccion: #{detalleLocalView.local.direccion}</p>
+                    <p>Municipio: #{detalleLocalView.local.municipio}</p>
+
+                </p:card>
+            </div>
+            <div class="flex flex-col">
+                <span class="text-2xl m-2">Reseñas</span>
+                <ui:repeat value="#{detalleLocalView.resenyas}" var="resenya">
+                    <div class="m-2">
+                        <p:card>
+                            <f:facet name="title">
+                                <h:outputText value="#{resenya.titulo}"/>
+                            </f:facet>
+                            <div class="product-grid-item-content">
+                                <div class="product-description"><h:outputText value="#{resenya.mensaje}"/></div>
+                                <p:rating readonly="true" value="#{resenya.puntuacion}"/>
+                            </div>
+                        </p:card>
+                    </div>
+                </ui:repeat>
+            </div>
+
+        </div>
+        <footer class="absolute bottom-0 w-full">
+            <p>© 2023, ReservaLocales S.L.</p>
+        </footer>
+    </div>
+</h:body>
+</html>

@@ -11,43 +11,38 @@
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </h:head>
 
-<h:body class="h-screen">
-    <div class="flex flex-row m-2 h-full">
+<h:body>
+    <div class="flex flex-row m-2">
         <!-- Menú -->
         <div class="flex m-2 w-auto">
             <nav>
-                <span><i class="pi pi-align-justify"></i> Menu</span>
                 <ul>
-                    <li class="m-2 whitespace-nowrap"><h:link outcome="cliente_index" value="Locales"/></li>
-<!--                    <li class="m-2"><h:link outcome="locales" value="Locales"/></li>-->
-<!--                    <li class="m-2"><h:link outcome="ejemplo" value="Ejemplo"/></li>-->
-                    <li class="m-2 whitespace-nowrap"><h:link outcome="reservas" value="Mis Reservas"/></li>
-<!--                    <li class="m-2"><h:link outcome="detalleReserva" value="DetalleReserva"/></li>-->
+                    <li class="m-2"><h:link outcome="index" value="Inicio"/></li>
+                    <li class="m-2"><h:link outcome="locales" value="Locales"/></li>
+                    <li class="m-2"><h:link outcome="ejemplo" value="Ejemplo"/></li>
+                    <li class="m-2"><h:link outcome="reserva" value="Reserva"/></li>
+                    <li class="m-2"><h:link outcome="detalleReserva" value="DetalleReserva"/></li>
                 </ul>
             </nav>
         </div>
 
         <!-- Contenido Dinámico -->
-        <div class="w-full h-full box-border">
+        <div>
             <main>
                 <div class="flex flex-col">
                     <div class="flex justify-end">
                         <div>
                             <div class="m-2">
-                                <h:form>
-                                    <div class="flex flex-row">
-                                        <p class="m-2"><h:outputText value="#{sessionScope.sesion.nombre} #{sessionScope.sesion.apellidos}"/></p>
-                                        <p:commandButton value="Cerrar sesion"
-                                                         action="#{indexView.cerrarSesion}"
-                                                         outcome="index"/>
-
-                                    </div>
-                                </h:form>
+                                <div class="flex flex-row">
+                                    <p class="m-2"><h:outputText value="#{sessionScope.sesion.nombre}"/></p>
+                                    <p:button value="Cerrar sesion" outcome="index"/>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <ui:insert name="contenido">Contenido predeterminado.</ui:insert>
                 </div>
+
             </main>
         </div>
     </div>

@@ -5,13 +5,16 @@
                 xmlns:jsf="http://xmlns.jcp.org/jsf"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
-                template="templates/plantilla.xhtml">
+                template="templates/plantilla_duenyo.xhtml">
 
     <ui:define name="titulo">
         Listado de locales
     </ui:define>
 
     <ui:define name="contenido">
+        <f:metadata>
+            <f:viewAction action="#{localesView.init()}"/>
+        </f:metadata>
         <div class="m-2">
             <span class="text-2xl">Listado de locales</span>
         </div>
@@ -26,11 +29,11 @@
             </p:column>
 
             <p:column headerText="Acciones">
-                <p:link value="Ver Detalle"
+                <p:button value="Ver Detalle"
                         outcome="detalleLocal"
                         icon="pi pi-search">
                     <f:param name="id" value="#{local.id}"/>
-                </p:link>
+                </p:button>
 
             </p:column>
 

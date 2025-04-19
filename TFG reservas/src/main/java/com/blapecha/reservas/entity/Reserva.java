@@ -14,11 +14,16 @@ public class Reserva {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long id;
-    private LocalDate fechaInicio;
-    private LocalDate fechaFin;
-    private Integer precioManyana;
-    private Integer precioTarde;
-    private String municipio;
-    private String local;
-    private String dirección;
+    private String codigo;
+    private LocalDate fecha;
+    private Boolean tarde;
+
+    @ManyToOne
+    @JoinColumn(name = "local_id", nullable = false)
+    private Local local;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id", nullable = false)
+    private Cliente cliente;
+
 }

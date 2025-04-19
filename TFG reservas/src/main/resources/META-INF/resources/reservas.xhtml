@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="templates/plantilla.xhtml">
+
+    <ui:define name="titulo">
+        Listado de reservas
+    </ui:define>
+
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{reservasView.buscarReservas}"/>
+    </f:metadata>
+
+    <ui:define name="contenido">
+        <div class="m-2">
+            <span class="text-2xl">Listado de reservas</span>
+        </div>
+        <p:dataTable id="tabla-reservas" var="reserva" value="#{reservasView.reservas}">
+
+            <p:column headerText="Código">
+                <h:outputText value="#{reserva.codigo}"/>
+            </p:column>
+
+            <p:column headerText="Fecha">
+                <h:outputText value="#{reserva.fecha}"/>
+            </p:column>
+            <p:column headerText="Local">
+                <h:outputText value="#{reserva.local.nombre}"/>
+            </p:column>
+
+            <p:column headerText="Acciones">
+                <h:form>
+                    <div>
+                        <div class="m-2">
+                            <p:commandButton value="Ver local"
+                                             action="#{reservasView.irALocal(reserva.local.id)}"
+                                             icon="pi pi-search">
+                            </p:commandButton>
+                        </div>
+                        <div class="m-2">
+                            <p:commandButton value="Crear reseña "
+                                             action="#{reservasView.irACrearResenya(reserva.local.id)}"
+                                             icon="pi pi-pen-to-square">
+                            </p:commandButton>
+                        </div>
+                        <div class="m-2">
+                            <p:commandButton value="Cancelar"
+                                             actionListener="#{reservasView.eliminarReserva(reserva.id)}"
+                                             outcome="reservas"
+                                             icon="pi pi-times"
+                                             styleClass="ui-button-danger"
+                                             update="tabla-reservas">
+                            </p:commandButton>
+                        </div>
+                    </div>
+                </h:form>
+
+            </p:column>
+
+        </p:dataTable>
+    </ui:define>
+</ui:composition>

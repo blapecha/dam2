@@ -23,6 +23,14 @@
                 <p>Direccion: #{detalleLocalView.local.direccion}</p>
                 <p>Municipio: #{detalleLocalView.local.municipio}</p>
 
+                <div class="m-5">
+                    <p:button value="Reservar"
+                              outcome="reservar.xhtml"
+                              icon="pi pi-cart-arrow-down">
+                        <f:param name="idLocal" value="#{detalleLocalView.local.id}"/>
+                    </p:button>
+                </div>
+
             </p:card>
 
             <div class="flex flex-col">
