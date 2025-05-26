@@ -35,7 +35,8 @@ public class ReservarView {
 
     //Campos del formulario
     private LocalDate fecha;
-    private String tarde;
+    private boolean tarde;
+
 
     public Local local;
     public Cliente cliente;
@@ -47,6 +48,7 @@ public class ReservarView {
         Reserva reserva = new Reserva();
         reserva.setCliente(this.cliente);
         reserva.setLocal(this.local);
+        reserva.setTarde(this.tarde);
         reserva.setFecha(this.fecha);
         reservaService.guardar(reserva);
         return "reservas?faces-redirect=true";

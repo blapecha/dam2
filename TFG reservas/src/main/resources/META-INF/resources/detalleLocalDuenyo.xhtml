@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="templates/plantilla_duenyo.xhtml">
+
+    <f:metadata>
+        <f:viewAction action="#{detalleLocalView.init()}"/>
+    </f:metadata>
+
+    <ui:define name="titulo">
+        #{msg['title.local.detail']}
+    </ui:define>
+    <ui:define name="contenido">
+
+        <span class="text-2xl">#{detalleLocalView.local.nombre}</span>
+        <p:tabView>
+            <p:tab title="#{msg['local.detail']}">
+                <div class="flex flex-row">
+                    <div class="">
+                        <p:card style="width: 25rem; margin-bottom: 2em">
+                            <f:facet name="title">
+                                #{detalleLocalView.local.nombre}
+                            </f:facet>
+                            <p:graphicImage value="#{detalleLocalView.local.chartAsByteArray}" stream="false"/>
+                            <p>#{msg['local.address']} #{detalleLocalView.local.direccion}</p>
+                            <p>#{msg['local.municipality']} #{detalleLocalView.local.municipio}</p>
+                            <p>#{msg['local.price.mourning']} #{detalleLocalView.local.precioManyana}</p>
+                            <p>#{msg['local.price.afternoon']} #{detalleLocalView.local.precioTarde}</p>
+
+                        </p:card>
+                    </div>
+                    <div class="m-2 max-h-96">
+                        <p:schedule id="schedule"
+                                    value="#{detalleLocalView.eventModel}"
+                                    widgetVar="myschedule"
+                                    timeZone="#{detalleLocalView.serverTimeZone}"
+                                    clientTimeZone="#{detalleLocalView.serverTimeZone}">
+                        </p:schedule>
+                    </div>
+                </div>
+            </p:tab>
+            <p:tab title="#{msg['local.economy']}">
+                <div class="flex flex-row">
+                    <div class="card m-2">
+                        <p:barChart model="#{detalleLocalView.barModel}" style="width: 100%; height: 500px;"/>
+
+                    </div>
+                    <div class="card m-2">
+                        <p:barChart model="#{detalleLocalView.barModel}" style="width: 100%; height: 500px;"/>
+                    </div>
+                </div>
+                <h:form>
+                    <p:commandButton value="Generar PDF"
+                                     action="#{detalleLocalView.generarPDF}"
+                                     ajax="false"
+                                     styleClass="ui-button-success"
+                                     icon="pi pi-file-pdf"/>
+                </h:form>
+
+
+            </p:tab>
+            <p:tab title="#{msg['reviews.text']}">
+                <div class="flex flex-col">
+                    <span class="text-2xl">#{msg['reviews.text']}</span>
+                    <ui:repeat value="#{detalleLocalView.resenyas}" var="resenya">
+                        <div class="m-2">
+                            <p:card>
+                                <f:facet name="title">
+                                    <h:outputText value="#{resenya.titulo}"/>
+                                </f:facet>
+                                <div class="product-grid-item-content">
+                                    <div class="product-description"><h:outputText value="#{resenya.mensaje}"/></div>
+                                    <p:rating readonly="true" value="#{resenya.puntuacion}"/>
+                                </div>
+                            </p:card>
+                        </div>
+                    </ui:repeat>
+                </div>
+            </p:tab>
+        </p:tabView>
+
+
+    </ui:define>
+</ui:composition>

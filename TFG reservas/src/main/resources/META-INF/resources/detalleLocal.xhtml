@@ -8,48 +8,50 @@
                 template="templates/plantilla.xhtml">
 
     <ui:define name="titulo">
-        Listado de locales
+        #{msg['title.local.detail']}
     </ui:define>
     <ui:define name="contenido">
 
-        <span class="text-2xl">Detalles del local!</span>
-        <div class="flex flex-col">
+        <span class="text-2xl">#{msg['title.local.detail']}</span>
+        <div class="flex flex-row">
+            <div class="">
+                <p:card style="width: 25rem; margin-bottom: 2em">
+                    <f:facet name="title">
+                        #{detalleLocalView.local.nombre}
+                    </f:facet>
+                    <p:graphicImage value="#{detalleLocalView.local.chartAsByteArray}" stream="false"/>
+                    <p>#{msg['local.address']} #{detalleLocalView.local.direccion}</p>
+                    <p>#{msg['local.municipality']} #{detalleLocalView.local.municipio}</p>
 
-            <p:card style="width: 25rem; margin-bottom: 2em">
-                <f:facet name="title">
-                    #{detalleLocalView.local.nombre}
-                </f:facet>
-
-                <p>Direccion: #{detalleLocalView.local.direccion}</p>
-                <p>Municipio: #{detalleLocalView.local.municipio}</p>
-
-                <div class="m-5">
-                    <p:button value="Reservar"
-                              outcome="reservar.xhtml"
-                              icon="pi pi-cart-arrow-down">
-                        <f:param name="idLocal" value="#{detalleLocalView.local.id}"/>
-                    </p:button>
-                </div>
-
-            </p:card>
-
-            <div class="flex flex-col">
-                <span class="text-2xl">Reseñas</span>
-                <ui:repeat value="#{detalleLocalView.resenyas}" var="resenya">
-                    <div class="m-2">
-                        <p:card>
-                            <f:facet name="title">
-                                <h:outputText value="#{resenya.titulo}"/>
-                            </f:facet>
-                            <div class="product-grid-item-content">
-                                <div class="product-description"><h:outputText value="#{resenya.mensaje}"/></div>
-                                <p:rating readonly="true" value="#{resenya.puntuacion}"/>
-                            </div>
-                        </p:card>
+                    <div class="m-5">
+                        <p:button value="#{msg['local.book']}"
+                                  outcome="reservar.xhtml"
+                                  icon="pi pi-cart-arrow-down">
+                            <f:param name="idLocal" value="#{detalleLocalView.local.id}"/>
+                        </p:button>
                     </div>
-                </ui:repeat>
-            </div>
 
+                </p:card>
+            </div>
+            <div class="m-2 max-h-96">
+
+            </div>
+        </div>
+        <div class="flex flex-col">
+            <span class="text-2xl">#{msg['reviews.text']}</span>
+            <ui:repeat value="#{detalleLocalView.resenyas}" var="resenya">
+                <div class="m-2">
+                    <p:card>
+                        <f:facet name="title">
+                            <h:outputText value="#{resenya.titulo}"/>
+                        </f:facet>
+                        <div class="product-grid-item-content">
+                            <div class="product-description"><h:outputText value="#{resenya.mensaje}"/></div>
+                            <p:rating readonly="true" value="#{resenya.puntuacion}"/>
+                        </div>
+                    </p:card>
+                </div>
+            </ui:repeat>
         </div>
 
     </ui:define>

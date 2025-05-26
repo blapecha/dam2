@@ -13,7 +13,7 @@
 
     <ui:define name="contenido">
         <div>
-            <h:form>
+            <h:form enctype="multipart/form-data">
                 <span class="text-lg m-2">Alta de local: </span>
                 <div class="flex flex-col">
                     <div class="m-2">
@@ -61,13 +61,21 @@
                             </f:facet>
                         </p:selectOneMenu>
                     </div>
+                    <div class="card">
+                        <h5>Single</h5>
+
+                            <p:fileUpload value="#{altaLocalView.file}" mode="simple" skinSimple="true"/>
+
+                    </div>
 
                     <div class="m-2">
                         <p:commandButton type="submit"
                                          action="#{altaLocalView.crearLocal}"
                                          value="Crear Local"
-                                         styleClass="m-2"></p:commandButton>
+                                         styleClass="m-2">
+                        </p:commandButton>
                     </div>
+
                 </div>
             </h:form>
         </div>

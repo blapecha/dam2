@@ -13,24 +13,11 @@
 
     <ui:define name="contenido">
         <div class="flex flex-col h-full">
-            <div class="justify-end flex flex-row">
-                <h:panelGroup rendered="#{!indexView.login}"
-                >
-                    <div class="m-2">
-                        <p:button value="Iniciar sesion" outcome="sesion"/>
-                    </div>
-                    <div class="m-2">
-                        <p:button value="Registrarse" outcome="registro"/>
-                    </div>
-                </h:panelGroup>
-                <h:panelGroup rendered="#{indexView.login}"
-                >
-
-                </h:panelGroup>
-            </div>
             <div>
                 <p:card>
-                    <span>Buscar local</span>
+                    <span class="m-2">
+                        <h:outputLabel value="#{msg['form.search']}"/>
+                    </span>
                     <h:form>
                         <div class="flex flex-row">
                             <div class="m-2">
@@ -39,7 +26,7 @@
                                                       dynamic="true"
                                                       filter="true" filterMatchMode="startsWith"
                                                       updateLabel="true"
-                                                      selectedLabel="Municipios seleccionados"
+                                                      selectedLabel="#{msg['form.dropdown.selected']}"
                                                       style="width: 15rem" panelStyle="width: 15rem" scrollHeight="250"
                                                       value="#{indexView.municipiosSeleccionados}">
                                     <f:selectItems value="#{indexView.municipios}"/>
@@ -54,7 +41,7 @@
                             </div>
                             <div class="m-2">
                                 <p:selectOneMenu id="option" value="#{indexView.tipoSeleccionado}">
-                                    <f:selectItem itemLabel="Selecciona un tipo" itemValue=""/>
+                                    <f:selectItem itemLabel="#{msg['form.dropdown.type']}" itemValue=""/>
                                     <f:selectItems value="#{indexView.tipos}"
                                                    itemLabel="#{tipo.name}"
                                                    itemValue="#{tipo}"
@@ -65,7 +52,7 @@
                             <div class="m-2">
                                 <p:commandButton action="#{indexView.buscar}"
                                                  update="lista-locales"
-                                                 value="Buscar"
+                                                 value="#{msg['form.search']}"
                                                  type="submit"/>
                             </div>
                         </div>
@@ -81,15 +68,24 @@
                                     <f:facet name="title">
                                         <h:outputText value="#{local.nombre}"></h:outputText>
                                     </f:facet>
-
-                                    <span class="block">Direccion: <h:outputText value="#{local.direccion}"/></span>
-                                    <span class="block">Municipio: <h:outputText value="#{local.municipio}"/></span>
-                                    <span class="block">Precio mañana: <h:outputText
-                                            value="#{local.precioManyana}"/></span>
-                                    <span class="block">Precio tarde: <h:outputText
-                                            value="#{local.precioTarde}"/></span>
-
-                                    <p:button value="Ver Detalle"
+                                    <p:graphicImage value="#{local.chartAsByteArray}" stream="false"/>
+                                    <span class="block">
+                                    <h:outputLabel value="#{msg['local.address']}"/>
+                                    <h:outputText value="#{local.direccion}"/>
+                                </span>
+                                    <span class="block">
+                                    <h:outputLabel value="#{msg['local.municipality']}"/>
+                                    <h:outputText value="#{local.municipio}"/>
+                                </span>
+                                    <span class="block">
+                                    <h:outputLabel value="#{msg['local.price.mourning']}"/>
+                                    <h:outputText value="#{local.precioManyana}"/>
+                                </span>
+                                    <span class="block">
+                                    <h:outputLabel value="#{msg['local.price.afternoon']}"/>
+                                    <h:outputText value="#{local.precioTarde}"/>
+                                </span>
+                                    <p:button value="#{msg['local.detail']}"
                                               outcome="detalleLocal"
                                               icon="pi pi-search">
                                         <f:param name="id" value="#{local.id}"/>
@@ -102,7 +98,6 @@
                 </p:outputPanel>
             </div>
         </div>
-
 
     </ui:define>
 </ui:composition>

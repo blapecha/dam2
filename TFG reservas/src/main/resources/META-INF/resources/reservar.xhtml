@@ -14,16 +14,19 @@
     <ui:define name="contenido">
         <div>
             <h:form>
-                <span class="text-lg m-2">Reservar local: <h:outputText value="#{reservarView.local.nombre}"/></span>
-                <div class="flex flex-col">
+                <span class="text-lg m-2">#{msg['book.extended']} <h:outputText value="#{reservarView.local.nombre}"/></span>
+                <div class="flex flex-row">
                     <span class="ui-float-label m-2">
                         <p:datePicker id="basic" value="#{reservarView.fecha}" />
-                       <p:outputLabel for="@previous" value="Fecha de Inicio"/>
+                       <p:outputLabel for="@previous" value="#{msg['form.start.date']}"/>
                    </span>
+                    <p:selectBooleanButton onLabel="#{msg['form.date.afternoon']}" offLabel="#{msg['form.date.mourning']}" value="#{reservarView.tarde}" style="width:6rem"/>
+                </div>
+                <div class="m-2">
                     <p:commandButton type="submit"
                                      action="#{reservarView.crearReserva}"
-                                     value="Reservar"
-                                     styleClass="m-2"></p:commandButton>
+                                     value="#{msg['local.book']}"
+                                     styleClass="m-2"/>
                 </div>
             </h:form>
         </div>

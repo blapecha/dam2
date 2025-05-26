@@ -35,6 +35,6 @@ public class SesionView {
         return "locales?faces-redirect=true\n";
       }
     }
-    return "cliente_index?faces-redirect=true\n";
+    return "index?faces-redirect=true\n";
   }
 }

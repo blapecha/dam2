@@ -4,10 +4,15 @@ import com.blapecha.reservas.entity.*;
 import com.blapecha.reservas.repository.*;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class BootstrapService {
@@ -27,115 +32,217 @@ public class BootstrapService {
     @Autowired
     private ReservaService reservaService;
 
+    @Autowired
+    private ResourceLoader resourceLoader;
+
     @PostConstruct
     public void init() {
-
-        var locales = localRepository.findAll();
-        Duenyo duenyo = new Duenyo();
-        duenyo.setUsername("admin");
-        duenyo.setPassword("admin");
-        duenyo.setNombre("admin");
-        duenyo.setApellidos("admin");
-        duenyo.setEmail("admin@admin.com");
-        duenyoRepository.save(duenyo);
-
-        Cliente cliente = new Cliente();
-        cliente.setUsername("cliente");
-        cliente.setPassword("cliente");
-        cliente.setNombre("Blanca");
-        cliente.setApellidos("Pérez Chavarría");
-        cliente.setEmail("cliente@cliente.com");
+        var cliente = crearCliente1();
         clienteRepository.save(cliente);
+        var cliente2 = crearCliente2();
+        clienteRepository.save(cliente2);
+        var duenyo = crearDuenyo1();
+        duenyoRepository.save(duenyo);
+        var local = crearLocal1();
+        local.setDuenyo(duenyo);
+        localRepository.save(local);
 
+        var resenya = crearResenya1();
+        resenya.setLocal(local);
+        resenya.setCliente(cliente);
+        resenyaRepository.save(resenya);
 
-        if (locales.isEmpty()) {
-            locales = new ArrayList<>();
-            for (int i = 0; i < 2; i++) {
-                Local local = new Local();
-                local.setDireccion("Direccion " + i);
-                local.setNombre("Nombre " + i);
-                local.setMunicipio("Valencia");
-                local.setPrecioManyana(100);
-                local.setPrecioTarde(150);
-                local.setDuenyo(duenyo);
-                local.setTipo(TipoLocalEnum.FIESTAS);
-                locales.add(local);
-            }
-            for (int i = 2; i < 4; i++) {
-                Local local = new Local();
-                local.setDireccion("Direccion " + i);
-                local.setNombre("Nombre " + i);
-                local.setMunicipio("Benetusser");
-                local.setPrecioManyana(100);
-                local.setPrecioTarde(150);
-                local.setDuenyo(duenyo);
-                local.setTipo(TipoLocalEnum.PARQUE_INFANTIL);
-                locales.add(local);
-            }
-            for (int i = 4; i < 6; i++) {
-                Local local = new Local();
-                local.setDireccion("Direccion " + i);
-                local.setNombre("Nombre " + i);
-                local.setMunicipio("Aldaia");
-                local.setPrecioManyana(100);
-                local.setPrecioTarde(150);
-                local.setDuenyo(duenyo);
-                local.setTipo(TipoLocalEnum.SALON_DE_EVENTOS);
-                locales.add(local);
-            }
+        resenya = crearResenya2();
+        resenya.setLocal(local);
+        resenya.setCliente(cliente2);
+        resenyaRepository.save(resenya);
 
-            localRepository.saveAll(locales);
+        var reserva = crearReserva1();
+        reserva.setLocal(local);
+        reserva.setCliente(cliente);
+        this.reservaService.guardar(reserva);
+        reserva = crearReserva1();
+        reserva.setFecha(reserva.getFecha().plusDays(1));
+        reserva.setLocal(local);
+        reserva.setCliente(cliente2);
+        this.reservaService.guardar(reserva);
+        reserva = crearReserva1();
+        reserva.setFecha(reserva.getFecha().plusDays(-1));
+        reserva.setTarde(false);
+        reserva.setLocal(local);
+        reserva.setCliente(cliente2);
+        this.reservaService.guardar(reserva);
+        reserva = crearReserva1();
+        reserva.setFecha(reserva.getFecha().plusDays(-1));
+        reserva.setTarde(true);
+        reserva.setLocal(local);
+        reserva.setCliente(cliente2);
+        this.reservaService.guardar(reserva);
 
-            Resenya resenya = new Resenya();
-            resenya.setCliente(cliente);
-            resenya.setTitulo("Lo pasamos genial");
-            resenya.setLocal(locales.get(0));
-            resenya.setPuntuacion(5);
-            resenya.setFecha(LocalDate.now());
-            resenya.setMensaje("Pasamos una tarde super divertida, local muy recomendable");
+        local = crearLocal2();
+        local.setDuenyo(duenyo);
+        localRepository.save(local);
 
-            resenyaRepository.save(resenya);
+        local = crearLocal3();
+        local.setDuenyo(duenyo);
+        localRepository.save(local);
 
-            resenya = new Resenya();
-            resenya.setCliente(cliente);
-            resenya.setTitulo("Justo lo que esperabamos");
-            resenya.setLocal(locales.get(0));
-            resenya.setPuntuacion(4);
-            resenya.setFecha(LocalDate.now());
-            resenya.setMensaje("El local en general bastante bien, aunque el dueño tardo un poco en aparecer");
+        duenyo = crearDuenyo2();
+        duenyoRepository.save(duenyo);
+        local = crearLocal4();
+        local.setDuenyo(duenyo);
+        localRepository.save(local);
 
-            resenyaRepository.save(resenya);
+        local = crearLocal5();
+        local.setDuenyo(duenyo);
+        localRepository.save(local);
 
-            Reserva reserva = new Reserva();
-            reserva.setCliente(cliente);
-            reserva.setFecha(LocalDate.now());
-            reserva.setLocal(locales.get(0));
-            reserva.setTarde(true);
+    }
 
-            reservaService.guardar(reserva);
+    private Reserva crearReserva1() {
+        Reserva reserva = new Reserva();
+        reserva.setCodigo("BOT-1");
+        reserva.setTarde(true);
+        reserva.setFecha(LocalDate.now());
+        return reserva;
+    }
 
+    private Cliente crearCliente1(){
+        Cliente cliente = new Cliente();
+        cliente.setUsername("c1");
+        cliente.setPassword("c1");
+        cliente.setNombre("Alicia");
+        cliente.setApellidos("Marti Guillem");
+        return cliente;
+    }
 
-            duenyo = new Duenyo();
-            duenyo.setUsername("admin1");
-            duenyo.setPassword("admin1");
-            duenyo.setNombre("admin1");
-            duenyo.setApellidos("admin1");
-            duenyo.setEmail("admin1@admin.com");
-            duenyoRepository.save(duenyo);
-            for (int i = 10; i < 12; i++) {
-                Local local = new Local();
-                local.setDireccion("Direccion " + i);
-                local.setNombre("Nombre " + i);
-                local.setMunicipio("Valencia");
-                local.setPrecioManyana(100);
-                local.setPrecioTarde(150);
-                local.setDuenyo(duenyo);
-                local.setTipo(TipoLocalEnum.FIESTAS);
-                locales.add(local);
-            }
-            localRepository.saveAll(locales);
+    private Cliente crearCliente2(){
+        Cliente cliente = new Cliente();
+        cliente.setUsername("c2");
+        cliente.setPassword("c2");
+        cliente.setNombre("Vicky");
+        cliente.setApellidos("Garcia DeOñate");
+        return cliente;
+    }
 
+    private Duenyo crearDuenyo1() {
+        Duenyo duenyo = new Duenyo();
+        duenyo.setUsername("d1");
+        duenyo.setPassword("d1");
+        duenyo.setNombre("Francisco");
+        duenyo.setApellidos("Vacas Galayev");
+        return duenyo;
+    }
 
+    private Duenyo crearDuenyo2() {
+        Duenyo duenyo = new Duenyo();
+        duenyo.setUsername("d2");
+        duenyo.setPassword("d2");
+        duenyo.setNombre("Denys");
+        duenyo.setApellidos("Carme Gonzalez");
+        return duenyo;
+    }
+
+    private Resenya crearResenya1() {
+        Resenya resenya = new Resenya();
+        resenya.setFecha(LocalDate.now());
+        resenya.setTitulo("Muy sorprendente");
+        resenya.setMensaje("Mucho mejor de lo que esperabamos, nos gusto mucho y sin duda repetiremos");
+        resenya.setPuntuacion(5);
+        return resenya;
+    }
+
+    private Resenya crearResenya2() {
+        Resenya resenya = new Resenya();
+        resenya.setFecha(LocalDate.now());
+        resenya.setTitulo("Aceptable");
+        resenya.setMensaje("Un local normal, nada a destacar");
+        resenya.setPuntuacion(3);
+        return resenya;
+    }
+
+    private Local crearLocal1() {
+        Local local = new Local();
+        try {
+            local.setImagen(resourceLoader.getResource("classpath:fachada2.png").getContentAsByteArray());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+        local.setDireccion("Calle Ter 12 Bajo");
+        local.setNombre("Festi-Party");
+        local.setTipo(TipoLocalEnum.FIESTAS);
+        local.setPrecioManyana(50);
+        local.setPrecioTarde(60);
+        local.setMunicipio("Valencia");
+        local.setBloqueado(false);
+        return local;
+    }
+
+    private Local crearLocal2() {
+        Local local = new Local();
+        try {
+            local.setImagen(resourceLoader.getResource("classpath:fachada8.png").getContentAsByteArray());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        local.setDireccion("Calle Rio Bidasoa 4 Bajo");
+        local.setNombre("Mini Fiestas");
+        local.setTipo(TipoLocalEnum.FIESTAS);
+        local.setPrecioManyana(50);
+        local.setPrecioTarde(60);
+        local.setMunicipio("Valencia");
+        local.setBloqueado(false);
+        return local;
+    }
+
+    private Local crearLocal3() {
+        Local local = new Local();
+        try {
+            local.setImagen(resourceLoader.getResource("classpath:fachada9.png").getContentAsByteArray());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        local.setDireccion("Calle Margarita 14 Bajo");
+        local.setNombre("Cine");
+        local.setTipo(TipoLocalEnum.FIESTAS);
+        local.setPrecioManyana(35);
+        local.setPrecioTarde(45);
+        local.setMunicipio("Valencia");
+        local.setBloqueado(false);
+        return local;
+    }
+
+    private Local crearLocal4() {
+        Local local = new Local();
+        try {
+            local.setImagen(resourceLoader.getResource("classpath:fachada4.png").getContentAsByteArray());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        local.setDireccion("Calle Amapola 14 Bajo");
+        local.setNombre("Sali parque");
+        local.setTipo(TipoLocalEnum.PARQUE_INFANTIL);
+        local.setPrecioManyana(65);
+        local.setPrecioTarde(75);
+        local.setMunicipio("Burjassot");
+        local.setBloqueado(false);
+        return local;
+    }
+
+    private Local crearLocal5() {
+        Local local = new Local();
+        try {
+            local.setImagen(resourceLoader.getResource("classpath:fachada10.png").getContentAsByteArray());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        local.setDireccion("Calle Rosa 25 Bajo");
+        local.setNombre("He Or She");
+        local.setTipo(TipoLocalEnum.SALON_DE_EVENTOS);
+        local.setPrecioManyana(120);
+        local.setPrecioTarde(150);
+        local.setMunicipio("Catarroja");
+        local.setBloqueado(false);
+        return local;
     }
 }

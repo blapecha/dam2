@@ -7,7 +7,9 @@
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-    <title><ui:insert name="titulo">Detalle de local</ui:insert></title>
+    <title><ui:insert name="titulo">
+        #{msg['title.local.detail']}
+    </ui:insert></title>
     <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
     <link href="#{resource['images/favicon.ico']}" rel="shortcut icon"/>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
@@ -15,22 +17,24 @@
 <h:body>
     <div>
 
-
-        <span class="text-2xl m-2">Detalles del local!</span>
+        <span class="text-2xl m-2">
+            <h:outputLabel value="#{msg['title.local.detail']}"/>
+        </span>
         <div class="flex flex-col flex-grow">
             <div class="m-2">
                 <p:card style="width: 25rem; margin-bottom: 2em">
                     <f:facet name="title">
                         #{detalleLocalView.local.nombre}
                     </f:facet>
+                    <p:graphicImage value="#{detalleLocalView.local.chartAsByteArray}" stream="false"/>
 
-                    <p>Direccion: #{detalleLocalView.local.direccion}</p>
-                    <p>Municipio: #{detalleLocalView.local.municipio}</p>
+                    <p>#{msg['local.address']} #{detalleLocalView.local.direccion}</p>
+                    <p>#{msg['local.municipality']} #{detalleLocalView.local.municipio}</p>
 
                 </p:card>
             </div>
             <div class="flex flex-col">
-                <span class="text-2xl m-2">Reseñas</span>
+                <span class="text-2xl m-2">#{msg['review.text']}</span>
                 <ui:repeat value="#{detalleLocalView.resenyas}" var="resenya">
                     <div class="m-2">
                         <p:card>
@@ -45,10 +49,8 @@
                     </div>
                 </ui:repeat>
             </div>
-
         </div>
-        <footer class="absolute bottom-0 w-full">
-            <p>© 2023, ReservaLocales S.L.</p>
+        <footer class="">
         </footer>
     </div>
 </h:body>

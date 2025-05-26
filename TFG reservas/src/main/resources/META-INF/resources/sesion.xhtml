@@ -20,19 +20,18 @@
             <h:graphicImage library="img" name="logo.jpg" styleClass="rounded-xl"/>
         </div>
         <p:card styleClass="m-2">
-            <h3 class="m-5">Iniciar sesion</h3>
             <div class="card">
                 <h:form>
                     <span class="ui-float-label m-5">
                        <p:inputText id="float-input-usuario" value="#{sesionView.user}"/>
-                       <p:outputLabel for="@previous" value="Usuario"/>
+                       <p:outputLabel for="@previous" value="#{msg['form.user']}"/>
                     </span>
                     <span class="ui-float-label m-5">
                         <p:password id="float-input-password" value="#{sesionView.password}" toggleMask="true" redisplay="true"/>
-                        <p:outputLabel for="@previous" value="Contraseña"/>
+                        <p:outputLabel for="@previous" value="#{msg['form.password']}"/>
                     </span>
                     <div class="m-5">
-                    <p:commandButton  type="submit" value="Iniciar" action="#{sesionView.enviarFormulario}"></p:commandButton>
+                    <p:commandButton  type="submit" value="#{msg['session.login']}" action="#{sesionView.enviarFormulario}"></p:commandButton>
                     </div>
 
                 </h:form>

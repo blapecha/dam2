@@ -20,33 +20,44 @@ import java.util.List;
 @Data
 public class ReservasView {
 
-    @Autowired
-    private ReservaService reservaService;
+  @Autowired private ReservaService reservaService;
 
-    private List<Reserva> reservas;
+  private List<Reserva> reservas;
 
-    public void eliminarReserva(Long idReserva) {
-        Reserva reserva = reservaService.buscarPorId(idReserva);
-        reservaService.eliminarReserva(reserva);
+  public void eliminarReserva(Long idReserva) {
+    Reserva reserva = reservaService.buscarPorId(idReserva);
+    reservaService.eliminarReserva(reserva);
+  }
+
+  public void buscarReservas() {
+    Sesion sesion =
+        (Sesion)
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sesion");
+    if (sesion.isCliente()) {
+      this.reservas = reservaService.findByCliente(sesion.getId());
+    }else{
+        //Es duenyo
+        this.reservas = reservaService.findByDuenyo(sesion.getId());
+    }
+  }
+
+  public String irALocal(Long idLocal) {
+    var sesion = (Sesion)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sesion");
+    if(sesion.isCliente()) {
+      return "detalleLocal?id=" + idLocal + "&faces-redirect=true";
+    }else{
+      return "detalleLocalDuenyo?id=" + idLocal + "&faces-redirect=true";
     }
 
-    public void buscarReservas() {
-        Sesion sesion = (Sesion) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sesion");
-        this.reservas = reservaService.findByCliente(sesion.getId());
-    }
+  }
 
-    public String irALocal(Long idLocal) {
-        return "detalleLocal?id=" + idLocal+"&faces-redirect=true";
-    }
+  public String irACrearResenya(Long idLocal) {
+    return "altaResenya?id=" + idLocal + "&faces-redirect=true";
+  }
 
-    public String irACrearResenya(Long idLocal) {
-        return "altaResenya?id=" + idLocal+"&faces-redirect=true";
-    }
-
-    @PostConstruct
-    public void init() {
-//        reservas =reservaService.findAll();
-        buscarReservas();
-
-    }
+  @PostConstruct
+  public void init() {
+    //        reservas =reservaService.findAll();
+    buscarReservas();
+  }
 }

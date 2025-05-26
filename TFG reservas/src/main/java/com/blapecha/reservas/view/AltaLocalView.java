@@ -12,6 +12,7 @@ import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
@@ -32,6 +33,9 @@ public class AltaLocalView {
     private Integer precioTarde;
     private String direccion;
     private String municipio;
+
+    private UploadedFile file;
+
     @Autowired
     private LocalService localService;
 
@@ -48,6 +52,7 @@ public class AltaLocalView {
         local.setTipo(tipo);
         local.setNombre(nombre);
         local.setDuenyo(duenyo);
+        local.setImagen(file.getContent());
         localService.guardar(local);
 
         return "locales?faces-redirect=true";

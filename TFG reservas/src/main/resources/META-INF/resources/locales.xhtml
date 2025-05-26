@@ -8,29 +8,28 @@
                 template="templates/plantilla_duenyo.xhtml">
 
     <ui:define name="titulo">
-        Listado de locales
+        #{msg['list.premises']}
     </ui:define>
-
+    <f:metadata>
+        <f:viewAction action="#{localesView.init()}"/>
+    </f:metadata>
     <ui:define name="contenido">
-        <f:metadata>
-            <f:viewAction action="#{localesView.init()}"/>
-        </f:metadata>
         <div class="m-2">
-            <span class="text-2xl">Listado de locales</span>
+            <span class="text-2xl">#{msg['list.premises']}</span>
         </div>
         <p:dataTable var="local" value="#{localesView.misLocales}">
 
-            <p:column headerText="Nombre">
+            <p:column headerText="#{msg['table.name']}">
                 <h:outputText value="#{local.nombre}"/>
             </p:column>
 
-            <p:column headerText="Municipio">
+            <p:column headerText="#{msg['table.municipality']}">
                 <h:outputText value="#{local.municipio}"/>
             </p:column>
 
-            <p:column headerText="Acciones">
-                <p:button value="Ver Detalle"
-                        outcome="detalleLocal"
+            <p:column headerText="#{msg['table.actions']}">
+                <p:button value="#{msg['local.detail']}"
+                        outcome="detalleLocalDuenyo"
                         icon="pi pi-search">
                     <f:param name="id" value="#{local.id}"/>
                 </p:button>

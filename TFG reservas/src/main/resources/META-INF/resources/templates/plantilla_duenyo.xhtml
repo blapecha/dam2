@@ -18,9 +18,9 @@
             <nav>
                 <span><i class="pi pi-align-justify"></i> Menu</span>
                 <ul>
-                    <li class="m-2"><h:link outcome="altaLocal" value="Alta de local"/></li>
-                    <li class="m-2"><h:link outcome="locales" value="Mis locales"/></li>
-                    <li class="m-2 whitespace-nowrap"><h:link outcome="reservas" value="Mis Reservas"/></li>
+                    <li class="m-2"><h:link outcome="altaLocal" value="#{msg['template.link.createpremise']}"/></li>
+                    <li class="m-2"><h:link outcome="locales" value="#{msg['template.link.mypremises']}"/></li>
+                    <li class="m-2 whitespace-nowrap"><h:link outcome="reservas_duenyo" value="#{msg['template.link.reservations']}"/></li>
                 </ul>
             </nav>
         </div>
@@ -31,16 +31,26 @@
                 <div class="flex flex-col">
                     <div class="flex justify-end">
                         <div>
-                            <div class="m-2">
+                            <div class="m-2 flex flex-row">
                                 <h:form>
-                                    <div class="flex flex-row">
-                                        <p class="m-2"><h:outputText value="#{sessionScope.sesion.nombre} #{sessionScope.sesion.apellidos}"/></p>
-                                        <p:commandButton value="Cerrar sesion"
+                                    <div class="flex flex-row ">
+                                        <p class="mr-2 mt-2"><h:outputText value="#{sessionScope.sesion.nombre} #{sessionScope.sesion.apellidos}"/></p>
+                                        <p:commandButton value="#{msg['session.logout']}"
                                                          action="#{indexView.cerrarSesion}"
                                                          outcome="index"/>
 
                                     </div>
                                 </h:form>
+                                <div class="ml-2">
+                                    <h:form>
+                                        <p:menuButton value="#{msg['language.select']}" icon="pi pi-globe">
+                                            <p:menuitem value="Español" actionListener="#{localeView.changeLanguage('es')}"
+                                                        update="@all" icon="pi pi-flag" />
+                                            <p:menuitem value="English" actionListener="#{localeView.changeLanguage('en')}"
+                                                        update="@all" icon="pi pi-flag" />
+                                        </p:menuButton>
+                                    </h:form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -50,8 +60,7 @@
         </div>
     </div>
     <!-- Pie de Página -->
-    <footer class="absolute bottom-0 w-full">
-        <p>© 2023, ReservaLocales S.L.</p>
+    <footer class="bottom-0 w-full">
     </footer>
 </h:body>
 </html>
